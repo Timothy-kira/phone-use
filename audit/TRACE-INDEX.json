@@ -1,0 +1,929 @@
+{
+  "task_count": 116,
+  "passed": 113,
+  "not_passed": 3,
+  "tasks": [
+    {
+      "task": "AudioRecorderRecordAudio",
+      "official_reward": 1.0,
+      "path": "passed-113/AudioRecorderRecordAudio",
+      "files": 19,
+      "screenshots": 4,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "AudioRecorderRecordAudioWithFileName",
+      "official_reward": 1.0,
+      "path": "passed-113/AudioRecorderRecordAudioWithFileName",
+      "files": 45,
+      "screenshots": 27,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "BrowserDraw",
+      "official_reward": 1.0,
+      "path": "passed-113/BrowserDraw",
+      "files": 63,
+      "screenshots": 35,
+      "externalized_outputs": 12
+    },
+    {
+      "task": "BrowserMaze",
+      "official_reward": 1.0,
+      "path": "passed-113/BrowserMaze",
+      "files": 36,
+      "screenshots": 15,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "BrowserMultiply",
+      "official_reward": 1.0,
+      "path": "passed-113/BrowserMultiply",
+      "files": 46,
+      "screenshots": 20,
+      "externalized_outputs": 13
+    },
+    {
+      "task": "CameraTakePhoto",
+      "official_reward": 1.0,
+      "path": "passed-113/CameraTakePhoto",
+      "files": 41,
+      "screenshots": 14,
+      "externalized_outputs": 14
+    },
+    {
+      "task": "CameraTakeVideo",
+      "official_reward": 1.0,
+      "path": "passed-113/CameraTakeVideo",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "ClockStopWatchPausedVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/ClockStopWatchPausedVerify",
+      "files": 16,
+      "screenshots": 1,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "ClockStopWatchRunning",
+      "official_reward": 1.0,
+      "path": "passed-113/ClockStopWatchRunning",
+      "files": 16,
+      "screenshots": 1,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "ClockTimerEntry",
+      "official_reward": 1.0,
+      "path": "passed-113/ClockTimerEntry",
+      "files": 19,
+      "screenshots": 3,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "ContactsAddContact",
+      "official_reward": 1.0,
+      "path": "passed-113/ContactsAddContact",
+      "files": 27,
+      "screenshots": 8,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "ContactsNewContactDraft",
+      "official_reward": 1.0,
+      "path": "passed-113/ContactsNewContactDraft",
+      "files": 24,
+      "screenshots": 5,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "ExpenseAddMultiple",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseAddMultiple",
+      "files": 35,
+      "screenshots": 11,
+      "externalized_outputs": 11
+    },
+    {
+      "task": "ExpenseAddMultipleFromGallery",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseAddMultipleFromGallery",
+      "files": 48,
+      "screenshots": 25,
+      "externalized_outputs": 11
+    },
+    {
+      "task": "ExpenseAddSingle",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseAddSingle",
+      "files": 26,
+      "screenshots": 7,
+      "externalized_outputs": 7
+    },
+    {
+      "task": "ExpenseDeleteDuplicates",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseDeleteDuplicates",
+      "files": 23,
+      "screenshots": 6,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "ExpenseDeleteDuplicates2",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseDeleteDuplicates2",
+      "files": 55,
+      "screenshots": 23,
+      "externalized_outputs": 20
+    },
+    {
+      "task": "ExpenseDeleteMultiple",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseDeleteMultiple",
+      "files": 30,
+      "screenshots": 10,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "ExpenseDeleteMultiple2",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseDeleteMultiple2",
+      "files": 46,
+      "screenshots": 18,
+      "externalized_outputs": 16
+    },
+    {
+      "task": "ExpenseDeleteSingle",
+      "official_reward": 1.0,
+      "path": "passed-113/ExpenseDeleteSingle",
+      "files": 20,
+      "screenshots": 5,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "FilesDeleteFile",
+      "official_reward": 1.0,
+      "path": "passed-113/FilesDeleteFile",
+      "files": 17,
+      "screenshots": 3,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "FilesMoveFile",
+      "official_reward": 1.0,
+      "path": "passed-113/FilesMoveFile",
+      "files": 32,
+      "screenshots": 16,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "MarkorAddNoteHeader",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorAddNoteHeader",
+      "files": 44,
+      "screenshots": 31,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "MarkorChangeNoteContent",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorChangeNoteContent",
+      "files": 28,
+      "screenshots": 8,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "MarkorCreateFolder",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorCreateFolder",
+      "files": 19,
+      "screenshots": 3,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "MarkorCreateNote",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorCreateNote",
+      "files": 23,
+      "screenshots": 9,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "MarkorCreateNoteAndSms",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorCreateNoteAndSms",
+      "files": 24,
+      "screenshots": 8,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "MarkorCreateNoteFromClipboard",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorCreateNoteFromClipboard",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "MarkorDeleteAllNotes",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorDeleteAllNotes",
+      "files": 19,
+      "screenshots": 4,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "MarkorDeleteNewestNote",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorDeleteNewestNote",
+      "files": 24,
+      "screenshots": 7,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "MarkorDeleteNote",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorDeleteNote",
+      "files": 20,
+      "screenshots": 5,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "MarkorEditNote",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorEditNote",
+      "files": 16,
+      "screenshots": 2,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "MarkorMoveNote",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorMoveNote",
+      "files": 18,
+      "screenshots": 1,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "MarkorTranscribeReceipt",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorTranscribeReceipt",
+      "files": 31,
+      "screenshots": 11,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "MarkorTranscribeVideo",
+      "official_reward": 1.0,
+      "path": "passed-113/MarkorTranscribeVideo",
+      "files": 70,
+      "screenshots": 29,
+      "externalized_outputs": 29
+    },
+    {
+      "task": "NotesIsTodo",
+      "official_reward": 1.0,
+      "path": "passed-113/NotesIsTodo",
+      "files": 17,
+      "screenshots": 3,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "NotesMeetingAttendeeCount",
+      "official_reward": 1.0,
+      "path": "passed-113/NotesMeetingAttendeeCount",
+      "files": 16,
+      "screenshots": 2,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "NotesRecipeIngredientCount",
+      "official_reward": 1.0,
+      "path": "passed-113/NotesRecipeIngredientCount",
+      "files": 22,
+      "screenshots": 5,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "NotesTodoItemCount",
+      "official_reward": 1.0,
+      "path": "passed-113/NotesTodoItemCount",
+      "files": 29,
+      "screenshots": 9,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "OpenAppTaskEval",
+      "official_reward": 1.0,
+      "path": "passed-113/OpenAppTaskEval",
+      "files": 14,
+      "screenshots": 1,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "OsmAndFavorite",
+      "official_reward": 1.0,
+      "path": "passed-113/OsmAndFavorite",
+      "files": 41,
+      "screenshots": 22,
+      "externalized_outputs": 7
+    },
+    {
+      "task": "OsmAndMarker",
+      "official_reward": 1.0,
+      "path": "passed-113/OsmAndMarker",
+      "files": 82,
+      "screenshots": 54,
+      "externalized_outputs": 16
+    },
+    {
+      "task": "RecipeAddMultipleRecipes",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeAddMultipleRecipes",
+      "files": 19,
+      "screenshots": 5,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "RecipeAddMultipleRecipesFromImage",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeAddMultipleRecipesFromImage",
+      "files": 18,
+      "screenshots": 4,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "RecipeAddMultipleRecipesFromMarkor",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeAddMultipleRecipesFromMarkor",
+      "files": 28,
+      "screenshots": 7,
+      "externalized_outputs": 9
+    },
+    {
+      "task": "RecipeAddMultipleRecipesFromMarkor2",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeAddMultipleRecipesFromMarkor2",
+      "files": 27,
+      "screenshots": 6,
+      "externalized_outputs": 9
+    },
+    {
+      "task": "RecipeAddSingleRecipe",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeAddSingleRecipe",
+      "files": 18,
+      "screenshots": 3,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "RecipeDeleteDuplicateRecipes",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteDuplicateRecipes",
+      "files": 28,
+      "screenshots": 9,
+      "externalized_outputs": 7
+    },
+    {
+      "task": "RecipeDeleteDuplicateRecipes2",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteDuplicateRecipes2",
+      "files": 53,
+      "screenshots": 30,
+      "externalized_outputs": 11
+    },
+    {
+      "task": "RecipeDeleteDuplicateRecipes3",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteDuplicateRecipes3",
+      "files": 50,
+      "screenshots": 17,
+      "externalized_outputs": 17
+    },
+    {
+      "task": "RecipeDeleteMultipleRecipes",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteMultipleRecipes",
+      "files": 14,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "RecipeDeleteMultipleRecipesWithConstraint",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteMultipleRecipesWithConstraint",
+      "files": 18,
+      "screenshots": 4,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "RecipeDeleteMultipleRecipesWithNoise",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteMultipleRecipesWithNoise",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "RecipeDeleteSingleRecipe",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteSingleRecipe",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "RecipeDeleteSingleWithRecipeWithNoise",
+      "official_reward": 1.0,
+      "path": "passed-113/RecipeDeleteSingleWithRecipeWithNoise",
+      "files": 24,
+      "screenshots": 6,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "RetroCreatePlaylist",
+      "official_reward": 1.0,
+      "path": "passed-113/RetroCreatePlaylist",
+      "files": 17,
+      "screenshots": 2,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "RetroPlayingQueue",
+      "official_reward": 1.0,
+      "path": "passed-113/RetroPlayingQueue",
+      "files": 26,
+      "screenshots": 7,
+      "externalized_outputs": 7
+    },
+    {
+      "task": "RetroPlaylistDuration",
+      "official_reward": 1.0,
+      "path": "passed-113/RetroPlaylistDuration",
+      "files": 39,
+      "screenshots": 15,
+      "externalized_outputs": 12
+    },
+    {
+      "task": "RetroSavePlaylist",
+      "official_reward": 1.0,
+      "path": "passed-113/RetroSavePlaylist",
+      "files": 41,
+      "screenshots": 14,
+      "externalized_outputs": 15
+    },
+    {
+      "task": "SaveCopyOfReceiptTaskEval",
+      "official_reward": 1.0,
+      "path": "passed-113/SaveCopyOfReceiptTaskEval",
+      "files": 12,
+      "externalized_outputs": 0
+    },
+    {
+      "task": "SimpleCalendarAddOneEvent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarAddOneEvent",
+      "files": 29,
+      "screenshots": 12,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "SimpleCalendarAddOneEventInTwoWeeks",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarAddOneEventInTwoWeeks",
+      "files": 34,
+      "screenshots": 10,
+      "externalized_outputs": 12
+    },
+    {
+      "task": "SimpleCalendarAddOneEventRelativeDay",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarAddOneEventRelativeDay",
+      "files": 32,
+      "screenshots": 9,
+      "externalized_outputs": 11
+    },
+    {
+      "task": "SimpleCalendarAddOneEventTomorrow",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarAddOneEventTomorrow",
+      "files": 29,
+      "screenshots": 8,
+      "externalized_outputs": 9
+    },
+    {
+      "task": "SimpleCalendarAddRepeatingEvent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarAddRepeatingEvent",
+      "files": 35,
+      "screenshots": 10,
+      "externalized_outputs": 13
+    },
+    {
+      "task": "SimpleCalendarAnyEventsOnDate",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarAnyEventsOnDate",
+      "files": 15,
+      "screenshots": 2,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "SimpleCalendarDeleteEvents",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarDeleteEvents",
+      "files": 27,
+      "screenshots": 7,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "SimpleCalendarDeleteEventsOnRelativeDay",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarDeleteEventsOnRelativeDay",
+      "files": 27,
+      "screenshots": 13,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "SimpleCalendarDeleteOneEvent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarDeleteOneEvent",
+      "files": 24,
+      "screenshots": 6,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "SimpleCalendarEventOnDateAtTime",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarEventOnDateAtTime",
+      "files": 16,
+      "screenshots": 1,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "SimpleCalendarEventsInNextWeek",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarEventsInNextWeek",
+      "files": 15,
+      "screenshots": 2,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "SimpleCalendarEventsInTimeRange",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarEventsInTimeRange",
+      "files": 19,
+      "screenshots": 3,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "SimpleCalendarEventsOnDate",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarEventsOnDate",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "SimpleCalendarFirstEventAfterStartTime",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarFirstEventAfterStartTime",
+      "files": 16,
+      "screenshots": 2,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "SimpleCalendarLocationOfEvent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarLocationOfEvent",
+      "files": 22,
+      "screenshots": 5,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "SimpleCalendarNextEvent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarNextEvent",
+      "files": 22,
+      "screenshots": 5,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "SimpleCalendarNextMeetingWithPerson",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleCalendarNextMeetingWithPerson",
+      "files": 24,
+      "screenshots": 6,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "SimpleDrawProCreateDrawing",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleDrawProCreateDrawing",
+      "files": 23,
+      "screenshots": 5,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "SimpleSmsReply",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleSmsReply",
+      "files": 12,
+      "externalized_outputs": 0
+    },
+    {
+      "task": "SimpleSmsReplyMostRecent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleSmsReplyMostRecent",
+      "files": 16,
+      "screenshots": 2,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "SimpleSmsResend",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleSmsResend",
+      "files": 51,
+      "screenshots": 34,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "SimpleSmsSend",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleSmsSend",
+      "files": 18,
+      "screenshots": 3,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "SimpleSmsSendClipboardContent",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleSmsSendClipboardContent",
+      "files": 21,
+      "screenshots": 3,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "SimpleSmsSendReceivedAddress",
+      "official_reward": 1.0,
+      "path": "passed-113/SimpleSmsSendReceivedAddress",
+      "files": 12,
+      "externalized_outputs": 0
+    },
+    {
+      "task": "SportsTrackerActivitiesCountForWeek",
+      "official_reward": 1.0,
+      "path": "passed-113/SportsTrackerActivitiesCountForWeek",
+      "files": 36,
+      "screenshots": 12,
+      "externalized_outputs": 12
+    },
+    {
+      "task": "SportsTrackerActivitiesOnDate",
+      "official_reward": 1.0,
+      "path": "passed-113/SportsTrackerActivitiesOnDate",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "SportsTrackerActivityDuration",
+      "official_reward": 1.0,
+      "path": "passed-113/SportsTrackerActivityDuration",
+      "files": 18,
+      "screenshots": 3,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "SportsTrackerLongestDistanceActivity",
+      "official_reward": 1.0,
+      "path": "passed-113/SportsTrackerLongestDistanceActivity",
+      "files": 28,
+      "screenshots": 14,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "SportsTrackerTotalDistanceForCategoryOverInterval",
+      "official_reward": 1.0,
+      "path": "passed-113/SportsTrackerTotalDistanceForCategoryOverInterval",
+      "files": 22,
+      "screenshots": 5,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "SportsTrackerTotalDurationForCategoryThisWeek",
+      "official_reward": 1.0,
+      "path": "passed-113/SportsTrackerTotalDurationForCategoryThisWeek",
+      "files": 43,
+      "screenshots": 19,
+      "externalized_outputs": 12
+    },
+    {
+      "task": "SystemBluetoothTurnOff",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBluetoothTurnOff",
+      "files": 16,
+      "screenshots": 2,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "SystemBluetoothTurnOffVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBluetoothTurnOffVerify",
+      "files": 27,
+      "screenshots": 8,
+      "externalized_outputs": 7
+    },
+    {
+      "task": "SystemBluetoothTurnOn",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBluetoothTurnOn",
+      "files": 18,
+      "screenshots": 3,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "SystemBluetoothTurnOnVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBluetoothTurnOnVerify",
+      "files": 21,
+      "screenshots": 8,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "SystemBrightnessMax",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBrightnessMax",
+      "files": 27,
+      "screenshots": 10,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "SystemBrightnessMaxVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBrightnessMaxVerify",
+      "files": 12,
+      "externalized_outputs": 0
+    },
+    {
+      "task": "SystemBrightnessMin",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBrightnessMin",
+      "files": 27,
+      "screenshots": 15,
+      "externalized_outputs": 0
+    },
+    {
+      "task": "SystemBrightnessMinVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemBrightnessMinVerify",
+      "files": 20,
+      "screenshots": 4,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "SystemCopyToClipboard",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemCopyToClipboard",
+      "files": 23,
+      "screenshots": 7,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "SystemWifiTurnOff",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemWifiTurnOff",
+      "files": 25,
+      "screenshots": 10,
+      "externalized_outputs": 3
+    },
+    {
+      "task": "SystemWifiTurnOffVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemWifiTurnOffVerify",
+      "files": 36,
+      "screenshots": 16,
+      "externalized_outputs": 8
+    },
+    {
+      "task": "SystemWifiTurnOn",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemWifiTurnOn",
+      "files": 17,
+      "screenshots": 4,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "SystemWifiTurnOnVerify",
+      "official_reward": 1.0,
+      "path": "passed-113/SystemWifiTurnOnVerify",
+      "files": 17,
+      "screenshots": 4,
+      "externalized_outputs": 1
+    },
+    {
+      "task": "TasksCompletedTasksForDate",
+      "official_reward": 1.0,
+      "path": "passed-113/TasksCompletedTasksForDate",
+      "files": 27,
+      "screenshots": 7,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "TasksDueNextWeek",
+      "official_reward": 1.0,
+      "path": "passed-113/TasksDueNextWeek",
+      "files": 39,
+      "screenshots": 14,
+      "externalized_outputs": 13
+    },
+    {
+      "task": "TasksDueOnDate",
+      "official_reward": 1.0,
+      "path": "passed-113/TasksDueOnDate",
+      "files": 27,
+      "screenshots": 8,
+      "externalized_outputs": 7
+    },
+    {
+      "task": "TasksHighPriorityTasks",
+      "official_reward": 1.0,
+      "path": "passed-113/TasksHighPriorityTasks",
+      "files": 24,
+      "screenshots": 8,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "TasksHighPriorityTasksDueOnDate",
+      "official_reward": 1.0,
+      "path": "passed-113/TasksHighPriorityTasksDueOnDate",
+      "files": 23,
+      "screenshots": 5,
+      "externalized_outputs": 6
+    },
+    {
+      "task": "TasksIncompleteTasksOnDate",
+      "official_reward": 1.0,
+      "path": "passed-113/TasksIncompleteTasksOnDate",
+      "files": 22,
+      "screenshots": 5,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "TurnOffWifiAndTurnOnBluetooth",
+      "official_reward": 1.0,
+      "path": "passed-113/TurnOffWifiAndTurnOnBluetooth",
+      "files": 48,
+      "screenshots": 27,
+      "externalized_outputs": 9
+    },
+    {
+      "task": "TurnOnWifiAndOpenApp",
+      "official_reward": 1.0,
+      "path": "passed-113/TurnOnWifiAndOpenApp",
+      "files": 24,
+      "screenshots": 8,
+      "externalized_outputs": 4
+    },
+    {
+      "task": "VlcCreatePlaylist",
+      "official_reward": 1.0,
+      "path": "passed-113/VlcCreatePlaylist",
+      "files": 22,
+      "screenshots": 5,
+      "externalized_outputs": 5
+    },
+    {
+      "task": "VlcCreateTwoPlaylists",
+      "official_reward": 1.0,
+      "path": "passed-113/VlcCreateTwoPlaylists",
+      "files": 37,
+      "screenshots": 11,
+      "externalized_outputs": 14
+    },
+    {
+      "task": "ExpenseAddMultipleFromMarkor",
+      "official_reward": 0.0,
+      "path": "not-passed-3/ExpenseAddMultipleFromMarkor",
+      "files": 21,
+      "screenshots": 4,
+      "externalized_outputs": 2
+    },
+    {
+      "task": "MarkorMergeNotes",
+      "official_reward": 0.0,
+      "path": "not-passed-3/MarkorMergeNotes",
+      "files": 17,
+      "externalized_outputs": 0
+    },
+    {
+      "task": "OsmAndTrack",
+      "official_reward": 0.0,
+      "path": "not-passed-3/OsmAndTrack",
+      "files": 34,
+      "screenshots": 4,
+      "externalized_outputs": 6
+    }
+  ]
+}

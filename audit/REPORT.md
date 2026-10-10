@@ -9,3 +9,5 @@
 | OsmAndTrack | 未补齐后续途经点，没有保存轨迹，官方奖励 0。官方离线地图检查通过。 | 没有官方判分错误的证据。 |
 
 任务由 MiniMax Code CLI / MiniMax-M3.1-Flash-Preview 在 AndroidWorld 模拟器上执行。判分条件未修改，基准运行关闭跨任务记忆。
+
+[完整轨迹压缩包及说明](TRACE-PACKAGE.md) · [逐题轨迹索引](TRACE-INDEX.json)
