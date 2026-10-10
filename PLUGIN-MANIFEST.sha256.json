@@ -1,0 +1,412 @@
+[
+ {
+  "path": "icon-dark.png",
+  "sha256": "82b0843f0fd03a4f405fbb455bda305d23aeba48755e71393f03bbea10fa151c",
+  "bytes": 140884
+ },
+ {
+  "path": "icon.png",
+  "sha256": "4d74ce8861c59e39c4b8b799fe383a4f625ee9fd94ec26e9f0814e459b8a0a5e",
+  "bytes": 126266
+ },
+ {
+  "path": "install.py",
+  "sha256": "e3212cc3ea642e981ce1c80b7d787fa32912a0741f655001ab54fe027bf1edb0",
+  "bytes": 15326
+ },
+ {
+  "path": "NOTICE",
+  "sha256": "d97c228c610a95111c0786e48c2f00cbae62b805be02305c6b98412df3a8215f",
+  "bytes": 488
+ },
+ {
+  "path": "README.md",
+  "sha256": "1058e47655c1dea3e5242fe08998a8955b112e2ba78ec7cb812f9f055873bf91",
+  "bytes": 6644
+ },
+ {
+  "path": "servers.mcp.json",
+  "sha256": "0178e735c425d8dec8a909d67c325acc91d93cbb9f9da38cfe33b9a2af2e4a6e",
+  "bytes": 1168
+ },
+ {
+  "path": ".claude-plugin/marketplace.json",
+  "sha256": "78ed718f0a72f5ae7e6f1b6fe05e06ea90e1fc9a40ac52939e55a490c364f083",
+  "bytes": 383
+ },
+ {
+  "path": ".claude-plugin/plugin.json",
+  "sha256": "a909b93957596f239199f0169c16c166f7406e5a0b2d56efe84b2d46db0cff5b",
+  "bytes": 848
+ },
+ {
+  "path": ".minimax-plugin/plugin.json",
+  "sha256": "8bdcf94134ba343145f7742fdaedd6a3757a2bd8ff55c1fb7e2b77f9c7bab62f",
+  "bytes": 1005
+ },
+ {
+  "path": "bin/phone-use-server.apk",
+  "sha256": "7ca16e16e7599479e4a920d935272f0a9926b972b4be2ed2a5187fe75ee59448",
+  "bytes": 2155623
+ },
+ {
+  "path": "docs/separation-plan.md",
+  "sha256": "fc4e9945a9f87e807a731e513102f8ff21bd52b7ec6cae992af3f162799f8306",
+  "bytes": 5969
+ },
+ {
+  "path": "hooks/hooks.json",
+  "sha256": "b99a4c8d6a1f670d11d84ccc26c3aba7b50a520cf61d0277a453ea6be7f7f465",
+  "bytes": 668
+ },
+ {
+  "path": "hooks/minimax-hooks.json",
+  "sha256": "35e615e5625b2c3635761ab9d143050ca810078c0d95875e55946eb93603dab8",
+  "bytes": 740
+ },
+ {
+  "path": "hooks/session_start.py",
+  "sha256": "777272d9090b6d2df1f3d57346d47e8ffc238729263665cfcdfbef2bacb5ed99",
+  "bytes": 6095
+ },
+ {
+  "path": "mcp/browser_agent.js",
+  "sha256": "04565133fe13bb29a1d2477e546f55414102c6de8cbfdc308798bed14674f88f",
+  "bytes": 28764
+ },
+ {
+  "path": "mcp/phone_browser.py",
+  "sha256": "2164d866663c75f72957140afc66c20086962fe0b36f2dfeee4060bd36217b81",
+  "bytes": 58984
+ },
+ {
+  "path": "mcp/phone_cdp.py",
+  "sha256": "762dcd152fbf9dcb757fbc2d4a8839f69c373783d8d8d5128bfd740f7d757c7e",
+  "bytes": 12124
+ },
+ {
+  "path": "mcp/phone_mcp.py",
+  "sha256": "11bf372cda87c6ea4322d7014bbb6c09f7e80124959a871d6fae43f5eb9a6f02",
+  "bytes": 79676
+ },
+ {
+  "path": "mcp/phone_native.py",
+  "sha256": "23b18a50cc20639d4061d91f8f1b1cff2f9c82f10db0e91a2b16f06c5846c294",
+  "bytes": 30031
+ },
+ {
+  "path": "mcp/phone_setup.py",
+  "sha256": "f6a24963a29fb81cbaca1aec4b9d8feefca3b73fa84ef665d408612f0060c4e4",
+  "bytes": 14466
+ },
+ {
+  "path": "mcp/phone_shots.py",
+  "sha256": "ba41ff4577f0fc576c919373804085701ffe40b3c7cb605816c04a96ea45e55f",
+  "bytes": 13498
+ },
+ {
+  "path": "server/build.gradle.kts",
+  "sha256": "a42a76f3eb0db5d8a4ddab6e3f7b70007953b3b18def2ff8a6b0fcffdc1de68b",
+  "bytes": 1612
+ },
+ {
+  "path": "server/gradle.properties",
+  "sha256": "83d8d9632de5b751adc6400b39a2990ce07bfa3396305f2761fcf1526967b941",
+  "bytes": 167
+ },
+ {
+  "path": "server/gradlew",
+  "sha256": "118b816808c173a1c973d1702f1e2dbf90a11a74885df433e5a61bc9645672d9",
+  "bytes": 8941
+ },
+ {
+  "path": "server/gradlew.bat",
+  "sha256": "bdecf875b6868cbcbd36a1f85eedf0832f358ff28092c5797ed645f7edce77d9",
+  "bytes": 2918
+ },
+ {
+  "path": "server/settings.gradle.kts",
+  "sha256": "bc3d65ba33bde0153c8f14bbf1b89ae04fb98ba57a2b4b20bf0fcacd8ca63eb6",
+  "bytes": 736
+ },
+ {
+  "path": "server/tools/build.ps1",
+  "sha256": "f155c49670893df5efb90aa56029284b8cca7ac521320f323376891bea0f0522",
+  "bytes": 1432
+ },
+ {
+  "path": "server/tools/deploy.ps1",
+  "sha256": "0a3f23f336fe9607140f6ba3def1835fa7b42d8c7f95aa575ac9cc357bb5b737",
+  "bytes": 1129
+ },
+ {
+  "path": "server/tools/patch.py",
+  "sha256": "1da3d68022a0edd10d771454c7323d2ab2d0dbd91bd421ab8432c2a53f737681",
+  "bytes": 975
+ },
+ {
+  "path": "server/gradle/wrapper/gradle-wrapper.jar",
+  "sha256": "cb0da6751c2b753a16ac168bb354870ebb1e162e9083f116729cec9c781156b8",
+  "bytes": 43453
+ },
+ {
+  "path": "server/gradle/wrapper/gradle-wrapper.properties",
+  "sha256": "b6ac0637d99161554193e587a458a0cec8cb52360adce318060e4c0798a701e5",
+  "bytes": 258
+ },
+ {
+  "path": "server/src/main/AndroidManifest.xml",
+  "sha256": "505a2d5bc98496b902e1d5092c8c5355308e944a9b0160fe93afd58e6ee8fd13",
+  "bytes": 972
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/AetherAgentModeShizukuService.kt",
+  "sha256": "b7f1ea43a9fcc3fe048cd59bf5ee41dc95378f4e0f47d077cb0a76dc8c93b85b",
+  "bytes": 93550
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/AgentModeDesk.kt",
+  "sha256": "f41ac0080c60e063794cca1a2b08b5f0133ccf2a6eb2c122dbea40f244feec89",
+  "bytes": 6738
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/AgentModeDisplaySpec.kt",
+  "sha256": "e6d993a10df4693b03aa16bcaa5fc07429d8e8610a3326cebca7cb92b7b62c06",
+  "bytes": 1777
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/AgentModeImeGuard.kt",
+  "sha256": "f3652f75b56bb62882621b9239140acdaffc0002a4fa9898cf94daf18930c9eb",
+  "bytes": 2357
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/AgentModeUiAutomation.kt",
+  "sha256": "419067ddc78a43a0798212f3a09c70288404a991e7161dd32427235683058940",
+  "bytes": 68803
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/AgentModeVirtualDisplayPolicy.kt",
+  "sha256": "fa4f6d68979e2471be21edce9d8bdb29c8a30309c4553b19861a31da62db3d8d",
+  "bytes": 2848
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/IAetherAgentModeService.kt",
+  "sha256": "0cf01c9320bf00da1de6907190f8dae2498c8da6b6569e9cbd92abe4a3ee24ba",
+  "bytes": 3057
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/OwnedInputClient.kt",
+  "sha256": "e3817c48bf847c3c7b0b1fe3ae65cf97c28149f8024ae5f8fba93abfafc4aed8",
+  "bytes": 5297
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/OwnedInputService.kt",
+  "sha256": "b3defada06dcbf76d9bcbbedefa3fa9baf8f1add5d5b535811df0b16fb47fbfc",
+  "bytes": 12799
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/agentmode/TextEdits.kt",
+  "sha256": "11e89124020e6568fdf773a2c0c232166576b3349bc89422595eaee874e02338",
+  "bytes": 4549
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AetherDiagnosticLogger.kt",
+  "sha256": "1a90a6286b3ee5f8a0423d0786d106daaa7073116d0087c8ee5e26ada2c752dd",
+  "bytes": 11585
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentDisplayMcp.kt",
+  "sha256": "efe5a5d39037d7ec7ef4a8781d707c7cb4607d75930c88bea3b62f7bad2469b3",
+  "bytes": 27144
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentDisplayShaper.kt",
+  "sha256": "dba6f7dc0db2fbeda001de8efe6a5e24027b82aaea64f5a7bd168d8af1c431f7",
+  "bytes": 122047
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeCapture.kt",
+  "sha256": "98ef60674cf193d31d2d2489418ada643cbdbace678a0a9dc0ffd03e2f8f1879",
+  "bytes": 3413
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeController.kt",
+  "sha256": "91ce1497b41233ccf3ae9b555ed2eee15d1f9176d646b2610726ea295b82a0c8",
+  "bytes": 172916
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeDisplayGate.kt",
+  "sha256": "ae567af43c3d43d0d1ae79cd366c780513367c0ee8ec556e8ecde48e608fb988",
+  "bytes": 1481
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeLearningRuntime.kt",
+  "sha256": "7b6d95fee480a086b9a1d4d7765996cb3ddb6577e8396a49e82ecca5df247edb",
+  "bytes": 70194
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModePortal.kt",
+  "sha256": "1b584e287db54b917c2bdf529d0c06e379e042410873910a204eb9642b2ef941",
+  "bytes": 17482
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeSafety.kt",
+  "sha256": "6d39a1f62109631c46d3e1736da982418dc9cb9de84eab0e2e28a6f0e6c346e5",
+  "bytes": 4649
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeSopStore.kt",
+  "sha256": "5e193385e53138adb85c0bd2a2dedcb24d2182cb45ee1ad846393743fbfefd91",
+  "bytes": 25200
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeToolNames.kt",
+  "sha256": "d4e32a6b15b7336d4de6491b52ee8c31e3479595001a7fcd380588d30730d844",
+  "bytes": 245
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AgentModeUiTree.kt",
+  "sha256": "daa8526a7efa9b65cfdeecd758de20fccd85ab844fd8e0441ed318a410092254",
+  "bytes": 65278
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/AppConcurrencyMemory.kt",
+  "sha256": "35a56f98dd8b7550c9babad7bba2491e0ed6a839410daf8fb0c93098a591ac16",
+  "bytes": 1533
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/DeviceCatalogMcp.kt",
+  "sha256": "31cec09078806385089661923bcfc46b3c95bdb1d17d87c80200f93af0e7e562",
+  "bytes": 3466
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/GuiFailureSignal.kt",
+  "sha256": "41ee00f70c27ac07d091b4c347ccebb3e1f4f73e5ad1dea134330e3ef0684099",
+  "bytes": 5251
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/GuiFlowSegmenter.kt",
+  "sha256": "aad63a4cbcbe9d3ed7d2da2c883299f515c3d16564ccb9d2d8cdbc2d55a79259",
+  "bytes": 4917
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/GuiLocator.kt",
+  "sha256": "b2dbcf38c21363048bc2f630cefd3c6562800940527f6d6d73065d270fea8c55",
+  "bytes": 12299
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/GuiSceneStore.kt",
+  "sha256": "0f2c48412e7d63a9b3fb677ffa1c7367db5caee748c18b50a39cd98ef026e829",
+  "bytes": 11390
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/GuiSignalStore.kt",
+  "sha256": "948732820c5109b0be1f0644f95dfda632616c387218c0b070761f3979629e0a",
+  "bytes": 4069
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/GuiWatchSchedule.kt",
+  "sha256": "8ef497a5d0277b3f93b7501bd3cee55da409439029a7b2039f9801669ed2cd9d",
+  "bytes": 2014
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/HostShims.kt",
+  "sha256": "07117fa5ef1556094c692f1187c88a7b20d3666ded9edc7ec536441338393b69",
+  "bytes": 6573
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/PhoneAppCatalog.kt",
+  "sha256": "b6d185fb8ae7a8705502bab05da858df51f7fb741df98c80d956fa93473f23dd",
+  "bytes": 22927
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/PhoneAppFlowMcp.kt",
+  "sha256": "e2db8a53ca16cdfec1c2cc62928447e3370b0f9476f4c4f36000525aa2d029c2",
+  "bytes": 28739
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/PhoneSettlement.kt",
+  "sha256": "0c376044c287d1cf7941c94ad2e9b9851e47937f6c3bde07edf5dae65d4e30d4",
+  "bytes": 19990
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/PhoneTaskMcp.kt",
+  "sha256": "3311077c62ac5619a05ee303a5da4f4a791607087185cbc457e457b14b794716",
+  "bytes": 13287
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/PhoneUiMcp.kt",
+  "sha256": "b432dd8029781b0c5b383ebb86c580e278c25f3ec9e14d5e1dfeecb2c0351fe7",
+  "bytes": 7093
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/PrivacyRedactor.kt",
+  "sha256": "db94d91a5ee73b73f2b7301b8213b3639d00aec175fc8731c0e7fee52ec40c0d",
+  "bytes": 8559
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/TeachingTraceDistiller.kt",
+  "sha256": "4055cfa96077984c8063b91fdbb162bbe0dd776c7956be67e503f2f55fed6426",
+  "bytes": 12828
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/data/UpaMcpEndpoints.kt",
+  "sha256": "8f987eeeb3c2008882ca6fcbe02b190f1c5ddd2be66ad59c7cb1b10fcafb8d60",
+  "bytes": 538
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/LaneScheduler.kt",
+  "sha256": "d306fe0c97297e68341d626e8379e51b2dee1ed03b4c45d07f407167a4d0f907",
+  "bytes": 5682
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/Main.kt",
+  "sha256": "88d1909e6ebb2cd52eb440fcbcdd9fb8477b730b9d3e4b3b7ec85a1dcb23bd40",
+  "bytes": 2196
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneLanesMcp.kt",
+  "sha256": "16010721b9fa08f28086e045e5673ae1ce538d1064b76573ea8dd60b762f5d13",
+  "bytes": 7206
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneRecordMcp.kt",
+  "sha256": "1dedf554668eaaf19e497fd61b616ed4b213530511cd186a28dce379b38300b5",
+  "bytes": 3130
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneSopsMcp.kt",
+  "sha256": "1024d9a6e3deebd64d69c97cc7857fa20ec03a6b0cab86ec7742511f36a06612",
+  "bytes": 17804
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneUseGateway.kt",
+  "sha256": "e2b563f816422ba563cc25ab991c4233531d8b375f2dcf76d2f41847a15d0892",
+  "bytes": 66609
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneUseRecorder.kt",
+  "sha256": "d6bcc0196f3fb3850432a771bc8f05f2c564707e0f39ba27a21e571c591fbaec",
+  "bytes": 12269
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneUseRuntime.kt",
+  "sha256": "2e2f6cb07cc16cc5026053c719a210824cde1a5d985d0fbf911685f1a7ab1c4d",
+  "bytes": 20287
+ },
+ {
+  "path": "server/src/main/java/kira/phoneuse/runtime/PhoneWindowPage.kt",
+  "sha256": "ab73065a9c99e8974357cbbc39b56fce7283b22f68f5df414604f3a4c40598ba",
+  "bytes": 14351
+ },
+ {
+  "path": "server/src/main/res/xml/owned_input.xml",
+  "sha256": "939c8a0e906b9f5b39050002b1a6f883e1294c792ae33cf482b8e04787e1d838",
+  "bytes": 168
+ },
+ {
+  "path": "skills/phone-use/SKILL.md",
+  "sha256": "ead30a9914f35f760b94d6c8babc055c9f6ca59578e3c58b30dc2eace98d17c8",
+  "bytes": 28494
+ }
+]

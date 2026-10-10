@@ -1,0 +1,27 @@
+{
+  "description": "Offer to set up Phone Use at session start when adb or the phone is not ready.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -B \"${CLAUDE_PLUGIN_ROOT}/hooks/session_start.py\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -B \"${CLAUDE_PLUGIN_ROOT}/hooks/session_start.py\" --compact",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

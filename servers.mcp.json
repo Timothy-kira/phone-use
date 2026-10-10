@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "mcpServers": {
+    "phone": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "-B",
+        "-c",
+        "import os,sys,glob\n_d=os.path.dirname;_e=os.path.expanduser\n_g=sys.argv[1] if len(sys.argv)>1 else ''\n_c=[os.path.abspath(_g)]+[os.path.join(os.environ.get(v,''),'mcp','phone_mcp.py') for v in ('PLUGIN_ROOT','MINIMAX_PLUGIN_ROOT') if os.environ.get(v)]\n_c+=sorted(glob.glob(os.path.join(_e('~/.minimax'),'**','phone-use*','mcp','phone_mcp.py'),recursive=True))\n_p=next((c for c in _c if c and os.path.isfile(c)),None)\n_p is None and sys.exit('phone-use: cannot locate mcp/phone_mcp.py; tried '+', '.join(_c))\nsys.argv=[_p];sys.path.insert(0,_d(_p));exec(compile(open(_p,encoding='utf-8').read(),_p,'exec'),{'__name__':'__main__','__file__':_p,'__package__':None})",
+        "./mcp/phone_mcp.py"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      },
+      "description": "Operate the connected Android phone over adb: the plugin starts its own server on the phone (only USB or wireless debugging is needed) and relays its tools.",
+      "timeout": 120000
+    }
+  }
+}

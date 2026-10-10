@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "name": "phone-use",
+  "displayName": "Phone Use",
+  "version": "0.8.25",
+  "description": "Drive the apps on your Android phone from the desktop agent: launch an app, read the screen as a screenshot or an accessibility tree, tap, swipe, type Chinese text and press system keys - on a virtual display shown live in a window on your computer, where you can take over at any time. The phone only needs USB debugging: the plugin runs its own server over adb and installs nothing on the phone.",
+  "author": "Akira",
+  "icon": "icon.png",
+  "darkIcon": "icon-dark.png",
+  "category": "Productivity",
+  "exampleQueries": [
+    "Set up Phone Use for my phone",
+    "Open Settings on my phone and tell me the Android version",
+    "On my phone, search Douban for highly rated movies this week"
+  ],
+  "apps": [],
+  "mcpServers": [
+    "servers.mcp.json"
+  ],
+  "skills": [
+    "skills/phone-use/SKILL.md"
+  ],
+  "hooks": [
+    "hooks/minimax-hooks.json"
+  ]
+}
