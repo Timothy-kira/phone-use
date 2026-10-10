@@ -1,0 +1,472 @@
+{
+ "task_count": 116,
+ "passed": 113,
+ "not_passed": 3,
+ "success_percent": 97.41,
+ "tasks": [
+  {
+   "task": "AudioRecorderRecordAudio",
+   "official_reward": 1.0
+  },
+  {
+   "task": "AudioRecorderRecordAudioWithFileName",
+   "official_reward": 1.0
+  },
+  {
+   "task": "BrowserDraw",
+   "official_reward": 1.0
+  },
+  {
+   "task": "BrowserMaze",
+   "official_reward": 1.0
+  },
+  {
+   "task": "BrowserMultiply",
+   "official_reward": 1.0
+  },
+  {
+   "task": "CameraTakePhoto",
+   "official_reward": 1.0
+  },
+  {
+   "task": "CameraTakeVideo",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ClockStopWatchPausedVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ClockStopWatchRunning",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ClockTimerEntry",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ContactsAddContact",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ContactsNewContactDraft",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseAddMultiple",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseAddMultipleFromGallery",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseAddMultipleFromMarkor",
+   "official_reward": 0.0
+  },
+  {
+   "task": "ExpenseAddSingle",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseDeleteDuplicates",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseDeleteDuplicates2",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseDeleteMultiple",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseDeleteMultiple2",
+   "official_reward": 1.0
+  },
+  {
+   "task": "ExpenseDeleteSingle",
+   "official_reward": 1.0
+  },
+  {
+   "task": "FilesDeleteFile",
+   "official_reward": 1.0
+  },
+  {
+   "task": "FilesMoveFile",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorAddNoteHeader",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorChangeNoteContent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorCreateFolder",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorCreateNote",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorCreateNoteAndSms",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorCreateNoteFromClipboard",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorDeleteAllNotes",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorDeleteNewestNote",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorDeleteNote",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorEditNote",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorMergeNotes",
+   "official_reward": 0.0
+  },
+  {
+   "task": "MarkorMoveNote",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorTranscribeReceipt",
+   "official_reward": 1.0
+  },
+  {
+   "task": "MarkorTranscribeVideo",
+   "official_reward": 1.0
+  },
+  {
+   "task": "NotesIsTodo",
+   "official_reward": 1.0
+  },
+  {
+   "task": "NotesMeetingAttendeeCount",
+   "official_reward": 1.0
+  },
+  {
+   "task": "NotesRecipeIngredientCount",
+   "official_reward": 1.0
+  },
+  {
+   "task": "NotesTodoItemCount",
+   "official_reward": 1.0
+  },
+  {
+   "task": "OpenAppTaskEval",
+   "official_reward": 1.0
+  },
+  {
+   "task": "OsmAndFavorite",
+   "official_reward": 1.0
+  },
+  {
+   "task": "OsmAndMarker",
+   "official_reward": 1.0
+  },
+  {
+   "task": "OsmAndTrack",
+   "official_reward": 0.0
+  },
+  {
+   "task": "RecipeAddMultipleRecipes",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeAddMultipleRecipesFromImage",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeAddMultipleRecipesFromMarkor",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeAddMultipleRecipesFromMarkor2",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeAddSingleRecipe",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteDuplicateRecipes",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteDuplicateRecipes2",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteDuplicateRecipes3",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteMultipleRecipes",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteMultipleRecipesWithConstraint",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteMultipleRecipesWithNoise",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteSingleRecipe",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RecipeDeleteSingleWithRecipeWithNoise",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RetroCreatePlaylist",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RetroPlayingQueue",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RetroPlaylistDuration",
+   "official_reward": 1.0
+  },
+  {
+   "task": "RetroSavePlaylist",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SaveCopyOfReceiptTaskEval",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarAddOneEvent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarAddOneEventInTwoWeeks",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarAddOneEventRelativeDay",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarAddOneEventTomorrow",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarAddRepeatingEvent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarAnyEventsOnDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarDeleteEvents",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarDeleteEventsOnRelativeDay",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarDeleteOneEvent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarEventOnDateAtTime",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarEventsInNextWeek",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarEventsInTimeRange",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarEventsOnDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarFirstEventAfterStartTime",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarLocationOfEvent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarNextEvent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleCalendarNextMeetingWithPerson",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleDrawProCreateDrawing",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleSmsReply",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleSmsReplyMostRecent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleSmsResend",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleSmsSend",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleSmsSendClipboardContent",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SimpleSmsSendReceivedAddress",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SportsTrackerActivitiesCountForWeek",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SportsTrackerActivitiesOnDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SportsTrackerActivityDuration",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SportsTrackerLongestDistanceActivity",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SportsTrackerTotalDistanceForCategoryOverInterval",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SportsTrackerTotalDurationForCategoryThisWeek",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBluetoothTurnOff",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBluetoothTurnOffVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBluetoothTurnOn",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBluetoothTurnOnVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBrightnessMax",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBrightnessMaxVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBrightnessMin",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemBrightnessMinVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemCopyToClipboard",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemWifiTurnOff",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemWifiTurnOffVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemWifiTurnOn",
+   "official_reward": 1.0
+  },
+  {
+   "task": "SystemWifiTurnOnVerify",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TasksCompletedTasksForDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TasksDueNextWeek",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TasksDueOnDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TasksHighPriorityTasks",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TasksHighPriorityTasksDueOnDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TasksIncompleteTasksOnDate",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TurnOffWifiAndTurnOnBluetooth",
+   "official_reward": 1.0
+  },
+  {
+   "task": "TurnOnWifiAndOpenApp",
+   "official_reward": 1.0
+  },
+  {
+   "task": "VlcCreatePlaylist",
+   "official_reward": 1.0
+  },
+  {
+   "task": "VlcCreateTwoPlaylists",
+   "official_reward": 1.0
+  }
+ ]
+}

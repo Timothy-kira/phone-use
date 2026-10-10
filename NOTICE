@@ -1,0 +1,8 @@
+Phone Use
+
+phone_browser follows approaches published by these projects; no code is copied from them:
+- browser-use (MIT) - numbered interactive elements and a compact text view of the page
+- chrome-devtools-mcp (Apache-2.0, Google) - accessibility-style snapshot with element handles,
+  Chrome DevTools Protocol over adb forward on Android
+- Playwright MCP / Playwright Android support (Apache-2.0, Microsoft) - ref-based actions,
+  devtools socket discovery from /proc/net/unix

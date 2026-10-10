@@ -1,0 +1,17 @@
+{
+  "name": "phone-use",
+  "owner": {
+    "name": "Akira",
+    "email": "akirawith51@gmail.com"
+  },
+  "metadata": {
+    "description": "Phone Use: drive an Android phone from a desktop agent"
+  },
+  "plugins": [
+    {
+      "name": "phone-use",
+      "source": "./",
+      "description": "Drive a connected Android phone: launch apps, read the screen, tap, swipe, type"
+    }
+  ]
+}

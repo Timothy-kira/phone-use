@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- app_process core plus optional, explicitly installed owned InputConnection companion. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <application android:hasCode="true" android:label="Phone Use Input" android:allowBackup="false">
+        <service android:name="kira.phoneuse.agentmode.OwnedInputService" android:exported="true" android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter><action android:name="android.view.InputMethod" /></intent-filter>
+            <meta-data android:name="android.view.im" android:resource="@xml/owned_input" />
+        </service>
+        <provider android:name="kira.phoneuse.agentmode.OwnedInputProvider" android:authorities="kira.phoneuse.input" android:exported="true" android:grantUriPermissions="false" />
+    </application>
+</manifest>

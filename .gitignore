@@ -1,0 +1,8 @@
+**/build/
+**/.gradle/
+**/.kotlin/
+**/__pycache__/
+server/local.properties
+.env
+*.keystore
+*.jks
