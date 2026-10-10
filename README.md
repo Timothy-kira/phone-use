@@ -2,7 +2,7 @@
 
 Phone Use 插件与 AndroidWorld 审计档案。当前插件版本 **0.8.25**。
 
-默认分支 `插件` 保存可安装插件源码及 APK；`audit-reports` 分支保存结果汇总。使用说明见 [Phone Use](docs/PHONE-USE.md)。
+默认分支 `插件` 保存可安装插件源码及 APK；`audit-reports` 分支保存结果汇总和完整评测轨迹。使用说明见 [Phone Use](docs/PHONE-USE.md)。
 
 ## AndroidWorld 评测
 
@@ -19,3 +19,7 @@ Phone Use 插件与 AndroidWorld 审计档案。当前插件版本 **0.8.25**。
 官方 [OsmAnd 历史修复](https://github.com/google-research/android_world/commit/ab451217332ae43fe22f9fc4af783a8da80db86f) 已包含在本地评分代码中。
 
 [评测结果汇总](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)
+
+已提供覆盖全部 116 道题的完整评测轨迹：113 道通过题目的轨迹，以及剩余三题各自最新且已有官方评分的失败轨迹。包含完整调用、工具回执、截图、模型总结和官方评分；不含录像，版本号和哈希已脱敏。
+
+[下载完整轨迹压缩包](https://github.com/Timothy-kira/phone-use/raw/refs/heads/audit-reports/audit/androidworld-traces.zip) · [轨迹包说明](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-PACKAGE.md) · [逐题索引](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-INDEX.json)
