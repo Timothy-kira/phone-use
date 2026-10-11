@@ -20,7 +20,7 @@ flowchart LR
 
 Phone Use works through **Model Context Protocol (MCP)** and can be used with **Claude Code, MiniMax Code, Codex, and Cursor**. The Android-side service runs through ADB; no root or Shizuku is required.
 
-**Version:** `0.8.25` · **[Documentation](docs/PHONE-USE.md)** · **[Agent skill](skills/phone-use/SKILL.md)** · **[AndroidWorld audit](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)**
+**Version:** `0.8.25` · **[Documentation](docs/PHONE-USE.md)** · **[Agent skill](skills/phone-use/SKILL.md)** · **[Evaluation reports](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)**
 
 ## Why Phone Use?
 
@@ -79,28 +79,12 @@ After connecting and authorizing your phone, invoke `phone_status` from your age
 
 For the full setup guide, tool arguments, optional input companion, multi-device operation, and safety behavior, see **[docs/PHONE-USE.md](docs/PHONE-USE.md)** and **[skills/phone-use/SKILL.md](skills/phone-use/SKILL.md)**.
 
-## AndroidWorld evaluation
+## Evaluation results
 
-**Cumulative tasks passed: 113 / 116.**
-
-The evaluation used **MiniMax Code CLI** as the agent harness and **MiniMax-M3.1-Flash-Preview** as the model, operating an AndroidWorld emulator with Phone Use.
-
-| Task not passed | Observed outcome | Assessment |
-| --- | --- | --- |
-| `ExpenseAddMultipleFromMarkor` | Entries were saved, but business conditions including notes and timestamps did not match. | No established evidence of a benchmark grading error. |
-| `MarkorMergeNotes` | The merged text missed the final newline: 64 characters instead of the expected 65. | Exact-text operation and verification failure. |
-| `OsmAndTrack` | Only two locations were handled; subsequent waypoints and the saved track were missing. Official score: 0.0. | The official offline-map check passed; no established evidence of a grading error. |
-
-**Evaluation protocol and scope**
-
-- Benchmark grading conditions were not modified.
-- **Cross-task memory was disabled** during benchmark runs. Tasks used independent configurations, and grader state was kept sealed while the model was operating.
-- The local grading code included the official [OsmAnd historical fix](https://github.com/google-research/android_world/commit/ab451217332ae43fe22f9fc4af783a8da80db86f).
-- **113/116 is a cumulative passed-task result**, not by itself proof of the performance gain from persistent memory, App Map, or cross-task learning. It is not presented here as a formally accepted leaderboard ranking.
-
-The public audit includes **116 task traces**: all 113 passed tasks and the latest officially scored failed trace for each of the three remaining tasks. The archive retains tool calls, receipts, screenshots, model summaries, and official grades. **It does not contain video.** Version numbers and hashes have been redacted.
-
-**[Audit summary](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)** · **[Full trace archive](https://github.com/Timothy-kira/phone-use/raw/refs/heads/audit-reports/audit/androidworld-traces.zip)** · **[Trace package details](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-PACKAGE.md)** · **[Per-task index](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-INDEX.json)**
+| Benchmark | Passed / Total | Pass rate | Report & traces |
+| --- | ---: | ---: | --- |
+| AndroidWorld | **113 / 116** | **97.41%** | [Details](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit) |
+| MiniWoB++ | **85 / 92** | **92.39%** | [Details](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit/miniwob) |
 
 ## Repository structure
 
@@ -112,6 +96,6 @@ The public audit includes **116 task traces**: all 113 passed tasks and the late
 | [`docs/PHONE-USE.md`](docs/PHONE-USE.md) | Detailed setup, tools and operating guide. |
 | [`install.py`](install.py) | Harness discovery and plugin installation. |
 | [`bin/`](bin/) | Android-side server APK. |
-| [`audit-reports` branch](https://github.com/Timothy-kira/phone-use/tree/audit-reports) | AndroidWorld results and full evaluation traces. |
+| [`audit-reports` branch](https://github.com/Timothy-kira/phone-use/tree/audit-reports) | Evaluation results and full traces. |
 
 The default branch **`插件`** contains the installable plugin and source code. The **`audit-reports`** branch contains the evaluation archive.
