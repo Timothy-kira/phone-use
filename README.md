@@ -2,9 +2,21 @@
 
 **Learn how Android apps work through interaction — not just how to tap them.**
 
-Phone Use is an Android interaction plugin for AI agents. It connects desktop AI agents to Android devices and turns real interactions into **reusable experience, observable results, and a growing understanding of apps**.
+Phone Use is an Android interaction plugin for AI agents. It connects desktop AI agents to Android devices and treats phone use as a process of exploring a digital environment, accumulating interaction experience, building an understanding of how that environment works, and continually improving decisions.
 
-Rather than treating every task as a fresh sequence of taps, Phone Use can reuse what it has learned from earlier interactions, including where features are located, how to navigate to them, and which workflows have worked before. Its knowledge is grounded in actual device observations—not hard-coded coordinates.
+Rather than treating every task as a fresh sequence of taps, Phone Use builds a **symbolic environment model** from interaction evidence. It can reuse what it has learned from earlier interactions, including where features are located, how to navigate to them, and which workflows have worked before. Its knowledge is grounded in actual device observations—not hard-coded coordinates.
+
+The goal is to move from **Learning to Act**—learning how to operate an interface—to **Learning How the World Works**: learning how an app environment behaves so an agent can make better decisions over time.
+
+```mermaid
+flowchart LR
+    P["Perception — 感知<br/>UI Tree · Screenshot · Browser DOM"]
+    S["State & Experience — 状态与经验<br/>Scene Cards · Trajectories · UI Fingerprints"]
+    A["Abstraction — 知识抽象<br/>Trace Distillation · Semantic Locators · Reusable SOPs"]
+    V["Action & Verification — 执行与验证<br/>Grounded Actions · Feedback · Failure Signals"]
+    P --> S --> A --> V
+    V -- "new observations and experience" --> P
+```
 
 Phone Use works through **Model Context Protocol (MCP)** and can be used with **Claude Code, MiniMax Code, Codex, and Cursor**. The Android-side service runs through ADB; no root or Shizuku is required.
 
