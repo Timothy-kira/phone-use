@@ -1,5 +1,6 @@
 {
   "hooks": {
+    "PreToolUse": [{"matcher": ".*", "hooks": [{"type": "command", "command": "python -B \"${PLUGIN_ROOT}/hooks/permission_context.py\"", "commandWindows": "python -B \"${PLUGIN_ROOT}\\hooks\\permission_context.py\"", "timeout": 5}]}],
     "SessionStart": [
       {
         "matcher": "startup",

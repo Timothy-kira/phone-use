@@ -425,6 +425,8 @@ object AgentDisplayShaper {
         var feedback = JSONObject()
         var observedContent = ""
         var repeatCount = 0
+        var lastIneffectiveAction = ""
+        var unverifiedActions = 0
         val readQuestions = HashSet<String>()
         val verifiedWrites = LinkedHashSet<String>()
         var volatileScreen = ""
@@ -433,7 +435,6 @@ object AgentDisplayShaper {
         var navigationEpoch = 0
         var blockedAction = ""
         var recoveryUsed = false
-        var recoveryReadUsed = false
         var externalObstacle = ""
         var dirty = false
         fun next(prefix: String) = "@$prefix${++counter}"
@@ -466,8 +467,8 @@ object AgentDisplayShaper {
                     g.taskDate = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(java.util.Date())
                     g.checkpoints = JSONArray((0 until steps.length()).map { i -> JSONObject()
                         .put("step", i + 1).put("goal", steps.optString(i).take(200)).put("status", "pending") })
-                    g.observedContent = ""; g.repeatCount = 0; g.readQuestions.clear(); g.verifiedWrites.clear(); g.volatileControls.clear(); g.volatileScreen = ""; g.seenStates.clear(); g.feedback = JSONObject()
-                    g.blockedAction = ""; g.recoveryUsed = false; g.recoveryReadUsed = false; g.externalObstacle = ""
+                    g.observedContent = ""; g.repeatCount = 0; g.lastIneffectiveAction = ""; g.unverifiedActions = 0; g.readQuestions.clear(); g.verifiedWrites.clear(); g.volatileControls.clear(); g.volatileScreen = ""; g.seenStates.clear(); g.feedback = JSONObject()
+                    g.blockedAction = ""; g.recoveryUsed = false; g.externalObstacle = ""
                     g.dirty = true
                 }
                 "checkpoint" -> {
@@ -504,7 +505,7 @@ object AgentDisplayShaper {
                     if (status == "done") {
                         unresolved?.put("unresolved", false)?.put("resolved_by", "evidenced_checkpoint_after_recovery")
                         g.checkpointSeq = g.evidenceSeq
-                        g.repeatCount = 0; g.blockedAction = ""; g.recoveryUsed = false; g.recoveryReadUsed = false
+                        g.repeatCount = 0; g.blockedAction = ""; g.recoveryUsed = false
                         g.readQuestions.clear(); g.verifiedWrites.clear(); g.volatileControls.clear(); g.volatileScreen = ""; g.seenStates.clear(); g.externalObstacle = ""
                         g.feedback = JSONObject().put("signal", "checkpoint_completed").put("score", 1)
                             .put("meaning", "The current step passed structured checks against fresh tool observations.")
@@ -740,6 +741,8 @@ object AgentDisplayShaper {
     }
 
     fun repetitionGate(lane: String, args: JSONObject): JSONObject? {
+        // Reading does not dispatch an operation or consume recovery attempts.
+        if (args.optString("action") in ReadActions || args.optString("action") in setOf("screenshot", "wait_idle", "zoom", "read_text", "read_field")) return null
         if (args.optString("action") in setOf("status", "recap", "map", "refs", "note", "pin", "teaching_status", "request_teaching", "switch_display", "notification_protection", "back", "home")) return null
         if (args.optString("action") == "key" && args.optString("key").uppercase().removePrefix("KEYCODE_") in
             setOf("BACK", "HOME", "ESCAPE", "WAKEUP", "4", "3", "111", "224")) return null
@@ -754,6 +757,7 @@ object AgentDisplayShaper {
                     val batch = args.optJSONArray("actions")
                     if (batch != null && (0 until batch.length()).any { batch.optJSONObject(it)?.let(::hits) == true }) return true
                     val dims = lastDimensions[lane]
+                    if (args.has("x") && !args.optDouble("x").isFinite() || args.has("y") && !args.optDouble("y").isFinite()) return false
                     val x = args.optDouble("x").let { if (it > 1000 && dims != null) it * 1000 / dims.first else it }.toInt()
                     val y = args.optDouble("y").let { if (it > 1000 && dims != null) it * 1000 / dims.second else it }.toInt()
                     return args.optString("action") in setOf("tap", "click", "double_tap", "long_press") && args.has("x") && args.has("y") &&
@@ -771,9 +775,6 @@ object AgentDisplayShaper {
                 g.feedback.put("recovery_ready", false)
                 return null // One retry after a successful recovery and a verified quiet observation.
             }
-            // One fresh recovery observation is separate from the one different action attempt.
-            if ((args.optString("action") in ReadActions || args.optString("action") in setOf("screenshot", "wait_idle", "zoom", "read_text")) &&
-                !g.recoveryReadUsed) { g.recoveryReadUsed = true; return null }
             if (args.optString("action") !in ReadActions && args.optString("action") !in setOf("screenshot", "wait_idle", "zoom", "read_text") &&
                 feedbackKey(lane, args) != g.blockedAction && !g.recoveryUsed) { g.recoveryUsed = true; return null }
             return JSONObject().put("ok", false).put("code", "REPLAN_REQUIRED")
@@ -829,7 +830,7 @@ object AgentDisplayShaper {
                 g.dirty = true
                 return
             }
-            if (failed && result.optString("code") in setOf("BAD_ARGS", "INVALID_ARGUMENTS", "INVALID_TEXT_RANGE", "TEXT_HASH_MISMATCH", "UNDO_FIELD_MISMATCH", "NO_UNDO")) {
+            if (failed && result.optString("code") in setOf("BAD_ARGS", "INVALID_ARGUMENTS", "INVALID_TEXT_RANGE", "TEXT_HASH_MISMATCH", "UNDO_FIELD_MISMATCH", "NO_UNDO", "NOT_A_SLIDER", "UNSUPPORTED_ACTION", "SUBMIT_UNSUPPORTED")) {
                 result.put("failure_source", "tool").put("dispatched", false)
                 g.feedback.put("signal", "parameter_rejected").put("score", -1)
                     .put("meaning", "Correct the arguments; a rejected parameter is not a new app obstacle and does not erase prior recovery evidence.")
@@ -871,7 +872,6 @@ object AgentDisplayShaper {
             val unresolved = checkpoint?.optJSONObject("obstacle")?.optBoolean("unresolved") == true
             if (unresolved && !failed && !reading && key != g.blockedAction) {
                 checkpoint?.optJSONObject("obstacle")?.put("recovery_action_succeeded", true)
-                g.recoveryReadUsed = false // Allow the observation that verifies this recovery.
             }
             if (unresolved && !failed && reading && action in setOf("read_text", "read") && result.optInt("total_chars") > 0 && newRead)
                 checkpoint?.optJSONObject("obstacle")?.put("recovery_observation", JSONObject().put("action_ref", result.optString("action_ref"))
@@ -890,8 +890,11 @@ object AgentDisplayShaper {
                 (!result.has("submission_verified") || result.optBoolean("submission_verified")) &&
                 (blockedTarget == null || recoveryTarget != null) &&
                 (obstacle?.optString("field_identity").isNullOrBlank() || obstacle?.optString("field_identity") == result.optString("field_identity"))
+            val sameTargetChanged = blockedTarget != null && recoveryTarget != null &&
+                (blockedTarget.text != recoveryTarget.text || blockedTarget.checked != recoveryTarget.checked ||
+                    blockedTarget.rangeText != recoveryTarget.rangeText || blockedTarget.state != recoveryTarget.state)
             val verifiedEffect = !failed && !reading && (if (fieldFailure) verifiedField else
-                key == g.blockedAction && observed && changed && (!result.has("submission_verified") || result.optBoolean("submission_verified")))
+                (key == g.blockedAction || sameTargetChanged) && observed && changed && (!result.has("submission_verified") || result.optBoolean("submission_verified")))
             val launchVerified = unresolved && !failed && observed && obstacle?.optString("action") == "launch" &&
                 obstacle.optString("expected_package").let { it.isNotBlank() && it == result.optString("package_name") }
             val previousWindow = blockedTarget?.windowId ?: -1
@@ -906,14 +909,19 @@ object AgentDisplayShaper {
                 checkpoint?.optJSONObject("obstacle")?.put("unresolved", false)?.put("resolved_by", result.optString("action_ref"))
                     ?.put("resolution_screen", currentScreen(lane)?.id.orEmpty())
                 checkpoint?.put("status", "pending")
-                g.externalObstacle = ""; g.repeatCount = 0; g.blockedAction = ""; g.recoveryUsed = false; g.recoveryReadUsed = false
+                g.externalObstacle = ""; g.repeatCount = 0; g.lastIneffectiveAction = ""; g.unverifiedActions = 0; g.blockedAction = ""; g.recoveryUsed = false
             }
             val stillBlocked = checkpoint?.optJSONObject("obstacle")?.optBoolean("unresolved") == true
             val blockedAttempts = if (stillBlocked) checkpoint?.optJSONObject("obstacle")?.optInt("attempts") ?: 0 else 0
             val visualObservation = !failed && !reading && content.length < 80 && result.optJSONObject("tree_diff")?.optBoolean("visual_changed") == true
-            val noProgress = (failed && !firstExternalBlock) || (!failed && !visualObservation && !verifiedEdit && ((reading && !newRead) || (!reading && observed && !novel)))
-            if (noProgress) g.repeatCount++ else if (!stillBlocked && (novel || newRead || verifiedEdit)) {
-                g.repeatCount = 0; g.blockedAction = ""; g.recoveryUsed = false; g.recoveryReadUsed = false
+            val noProgress = !reading && ((failed && !firstExternalBlock) || (!failed && !verifiedEdit && !novel))
+            if (noProgress) {
+                g.repeatCount = if (g.lastIneffectiveAction == key) g.repeatCount + 1 else 1
+                g.lastIneffectiveAction = key
+                g.unverifiedActions++ // Distinct points on a canvas are unknown effects, not verified progress.
+            } else if (!reading && !stillBlocked && (novel || verifiedEdit)) {
+                g.lastIneffectiveAction = ""; g.unverifiedActions = 0
+                g.repeatCount = 0; g.blockedAction = ""; g.recoveryUsed = false
             }
             if (observed) g.observedContent = state
             g.feedback = JSONObject().put("signal", if ((verifiedEffect || launchVerified || superseded) && unresolved) "verified_recovery"
@@ -925,7 +933,7 @@ object AgentDisplayShaper {
             checkpoint?.let { g.feedback.put("current_step", JSONObject(it.toString())) }
             if (g.taskDate.isNotBlank() && Regex("今天|今日|\\btoday\\b", RegexOption.IGNORE_CASE).containsMatchIn(g.goal))
                 g.feedback.put("date_scope", g.taskDate).put("scope_hint", "Only this phone date is today for this task. Yesterday's items are outside scope. A verified empty result is a valid answer; do not substitute another date.")
-            if (g.repeatCount >= 2 || blockedAttempts >= 3) {
+            if (g.repeatCount >= 2 || g.unverifiedActions >= 6 || blockedAttempts >= 3) {
                 if (g.blockedAction.isBlank() && !reading) g.blockedAction = key
                 g.feedback.put("replan_required", true).put("next", "Inspect the blocker or native failure, then try one distinct grounded recovery. Recurring masks do not justify refreshing or clicking through. For credentials, use the takeover questionnaire. Stay in the requested app.")
             }

@@ -1,0 +1,16 @@
+const assert = require('assert');
+const fs = require('fs');
+const vm = require('vm');
+const source = fs.readFileSync(require('path').join(__dirname,'../mcp/browser_agent.js'),'utf8');
+const policy = JSON.parse(fs.readFileSync(require('path').join(__dirname,'../mcp/interaction_policy.json'),'utf8'));
+const context = vm.createContext({WeakMap,WeakRef,Map,Set,Number,window:{__pu_ref_base:1000000,__pu_policy:policy}});
+vm.runInContext(source,context);
+const element = {isConnected:true};
+const old = context.window.__pu.idOf(element);
+assert.equal(context.window.__pu.get(old),element);
+context.window.__pu = undefined;
+context.window.__pu_ref_base = 2000000;
+vm.runInContext(source,context);
+assert.equal(context.window.__pu.get(old),null);
+assert.notEqual(context.window.__pu.idOf(element),old);
+console.log('Document reference isolation passed.');

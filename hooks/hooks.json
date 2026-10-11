@@ -1,6 +1,7 @@
 {
   "description": "Offer to set up Phone Use at session start when adb or the phone is not ready.",
   "hooks": {
+    "PreToolUse": [{"matcher": ".*", "hooks": [{"type": "command", "command": "python -B \"${CLAUDE_PLUGIN_ROOT}/hooks/permission_context.py\"", "timeout": 5}]}],
     "SessionStart": [
       {
         "matcher": "startup",

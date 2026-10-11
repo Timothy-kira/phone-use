@@ -20,7 +20,7 @@ flowchart LR
 
 Phone Use works through **Model Context Protocol (MCP)** and can be used with **Claude Code, MiniMax Code, Codex, and Cursor**. The Android-side service runs through ADB; no root or Shizuku is required.
 
-**Version:** `0.8.25` · **[Documentation](docs/PHONE-USE.md)** · **[Agent skill](skills/phone-use/SKILL.md)** · **[Evaluation reports](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)**
+**Version:** `0.8.27` · **[Documentation](docs/PHONE-USE.md)** · **[Agent skill](skills/phone-use/SKILL.md)** · **[Evaluation reports](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)**
 
 ## Why Phone Use?
 

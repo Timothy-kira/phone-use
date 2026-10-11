@@ -60,11 +60,6 @@ internal object AgentModeSafety {
         "keyguard",
     )
 
-    private val SensitiveLabels = listOf(
-        "支付", "转账", "付款", "删除", "卸载", "授权", "安装",
-        "pay", "transfer", "delete", "uninstall", "grant", "install",
-    )
-
     fun isProtectedPackage(packageName: String): Boolean {
         val pkg = packageName.trim().lowercase()
         if (pkg.isEmpty()) return false
@@ -96,8 +91,7 @@ internal object AgentModeSafety {
         nodes.any { it.focused && it.password }
 
     fun userTakeover(nodes: List<AgentModeUiTree.RichNode>): JSONObject? {
-        val credential = nodes.any { it.password && it.editable } || nodes.any { it.editable &&
-            Regex("验证码|verification code|one.time.code|otp", RegexOption.IGNORE_CASE).containsMatchIn("${it.id} ${it.hint} ${it.desc}") }
+        val credential = nodes.any { it.editable && sensitiveField(it) }
         if (!credential) return null
         return JSONObject().put("required", true).put("reason", "credentials")
             .put("question", "当前步骤需要登录、密码或验证码，请在手机上接管完成。完成后请选择已完成，插件会重新观察并继续当前任务。")
@@ -105,12 +99,8 @@ internal object AgentModeSafety {
             .put("resume", "Reobserve the same display and resume the current checkpoint. Do not request or store the secret.")
     }
 
-    fun looksSensitiveLabel(label: String): Boolean {
-        val value = label.trim().lowercase()
-        if (value.isBlank()) return false
-        return SensitiveLabels.any { token ->
-            value.equals(token, ignoreCase = true) ||
-                (token.length >= 2 && value.contains(token, ignoreCase = true))
-        }
-    }
+    fun looksSensitiveLabel(label: String): Boolean = InteractionPolicy.risky.containsMatchIn(label)
+
+    fun sensitiveField(node: AgentModeUiTree.RichNode): Boolean = node.password ||
+        InteractionPolicy.sensitive.containsMatchIn("${node.id} ${node.hint} ${node.desc}")
 }

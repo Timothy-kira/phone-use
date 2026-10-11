@@ -48,7 +48,9 @@ from phone_native import NATIVE_TOOL, PhoneNative
 from phone_shots import SHOTS_TOOL, ShotStore
 
 SERVER_NAME = "phone"
-SERVER_VERSION = "0.8.25"
+from host_policy import permission_mode
+
+SERVER_VERSION = "0.8.27"
 PROTOCOL_VERSION = "2025-06-18"
 DEVICE_PORT = 18793
 STARTUP_WAIT_SECONDS = 8
@@ -234,7 +236,7 @@ SERVER_INSTRUCTIONS = (
     "- Search: prefer phone_text for exact text edits; agent_display search(text) writes through the same direct engine and submits a supported editor action, verify submission_verified and result. Use a button only if keyboard submission is unverified. "
     "Windows have distinct ids/layers/parent/anchor/touch_region; a floating window outside the target does not block it. "
     "NATIVE_STABILITY_UNVERIFIED reports a tool issue, not an advertisement. The current todo retains unresolved blockers across refreshes. "
-    "When user_takeover.required=true, ask the host's questionnaire, let the user complete credentials on the phone, then reobserve the same display and resume. Never request the secret.\n"
+    "Permission follows trusted host mode: full needs no extra question; auto/ask requires host approval; deny refuses. Model flags cannot grant permission. If user_takeover.required=true, use the host questionnaire then reobserve the same display.\n"
     "- Web pages: phone_browser (snapshot refs eN, click, fill, form inspect/fill, extract, cited screenshots).\n"
     "- Parallel work: lane:<name> on any tool gives a separate display; phone_lanes plan says what can run in "
     "parallel. QUEUED means nothing was done - retry later.\n"
@@ -544,6 +546,7 @@ class PhoneLink:
                 headers={"Content-Type": "application/json", "Accept": "application/json",
                          "X-Aether-Session-Id": self.session_id,
                          "X-Phone-Timeout": str(effective_timeout),
+                         "X-Phone-Permission": permission_mode(),
                          **{k: str(v) for k, v in (headers or {}).items() if v not in (None, "")}},
                 method="POST",
             )
@@ -1008,6 +1011,7 @@ class Bridge:
             self.browsers[id(link)] = browser
         device = None if link is self.link else link.serial
         browser.display_call = lambda a, d=device, l=lane: self.display_call(a, device=d, lane=l)
+        browser.text_call = lambda a, d=device, l=lane: self.receipt_body(self.call("phone_text", {**a, **({"device": d} if d else {}), **({"lane": l} if l else {})}))
         browser.record_log = lambda a, r, k=link: self.record_log(a, r, k)
         return browser
 
@@ -1198,6 +1202,9 @@ class Bridge:
 
     def call(self, name: str, args: dict) -> dict:
         args = dict(args or {})
+        args.pop("_host_permission", None)
+        if permission_mode() == "deny" and name != STATUS_TOOL["name"]:
+            return {"content": [{"type": "text", "text": json.dumps({"ok": False, "code": "HOST_PERMISSION_DENIED", "dispatched": False})}], "isError": True}
         if args.pop("async", False) and name not in (JOBS_TOOL["name"], STATUS_TOOL["name"], SETUP_TOOL["name"]):
             return self.start_job(name, args)
         if name == JOBS_TOOL["name"]:

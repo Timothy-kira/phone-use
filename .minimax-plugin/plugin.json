@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "phone-use",
   "displayName": "Phone Use",
-  "version": "0.8.25",
+  "version": "0.8.27",
   "description": "Drive the apps on your Android phone from the desktop agent: launch an app, read the screen as a screenshot or an accessibility tree, tap, swipe, type Chinese text and press system keys - on a virtual display shown live in a window on your computer, where you can take over at any time. The phone only needs USB debugging: the plugin runs its own server over adb and installs nothing on the phone.",
   "author": "Akira",
   "icon": "icon.png",

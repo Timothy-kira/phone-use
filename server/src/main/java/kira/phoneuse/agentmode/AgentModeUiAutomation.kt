@@ -61,9 +61,23 @@ internal class AgentModeUiAutomation {
         var fieldIdentity = ""
         try {
             if (!node.isEditable && !node.isPassword) return null
-            if (node.isPassword) throw TextEditFailure("USER_TAKEOVER_REQUIRED", "Let the user enter credentials on the phone.")
+            val sensitive = node.isPassword || kira.phoneuse.data.InteractionPolicy.sensitive.containsMatchIn("${node.viewIdResourceName} ${node.hintText} ${node.contentDescription}")
+            if (sensitive && args.optString("_host_permission") != "full") throw TextEditFailure("USER_TAKEOVER_REQUIRED", "Let the user enter credentials on the phone.")
             if (!node.refresh() || !node.isFocused || !node.isEnabled) throw TextEditFailure("INPUT_FIELD_UNAVAILABLE", "The editor lost focus before writing.")
             if (args.optString("package").isNotBlank() && node.packageName?.toString() != args.optString("package")) throw TextEditFailure("INPUT_CONTEXT_CHANGED", "The editor belongs to another app.")
+            if (sensitive) {
+                val action = args.optString("edit_action")
+                if (action == "read") return JSONObject().put("ok", true).put("dispatched", false)
+                    .put("value_redacted", true).put("text_verified", false).put("used_backend", "a11y")
+                if (action !in setOf("set", "clear")) throw TextEditFailure("SENSITIVE_EDIT_UNSUPPORTED", "Use one replacement for a credential; its contents are never read or retained for undo.")
+                if (!node.actionList.any { it.id == AccessibilityNodeInfo.ACTION_SET_TEXT }) return null
+                val value = if (action == "clear") "" else args.optString("text")
+                val accepted = node.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT,
+                    Bundle().apply { putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, value) })
+                return JSONObject().put("ok", accepted).put("code", if (accepted) "SENSITIVE_INPUT_DISPATCHED" else "TEXT_ACTION_REJECTED")
+                    .put("dispatched", true).put("value_redacted", true).put("text_verified", false)
+                    .put("effect", "unknown").put("used_backend", "a11y")
+            }
             val before = nodeText(node)
             val box = Rect(); node.getBoundsInScreen(box)
             val key = "a11y|$displayId|${node.windowId}|${node.packageName}|${node.viewIdResourceName}|${node.className}|$box"

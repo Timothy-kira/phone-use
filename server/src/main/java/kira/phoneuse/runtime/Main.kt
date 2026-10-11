@@ -17,7 +17,7 @@ import kira.phoneuse.data.UpaMcpHttpPort
  * so the phone needs nothing but USB debugging.
  */
 object Main {
-    const val Version = "0.8.25"
+    const val Version = "0.8.27"
 
     @JvmStatic
     fun main(args: Array<String>) {

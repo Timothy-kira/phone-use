@@ -235,6 +235,7 @@ class PhoneUseGateway(
         runtime.lastSessionId = session
         val call = CallContext(
             session = session,
+            permissionMode = request.headers["x-phone-permission"].orEmpty(),
             lane = laneKey(request.headers["x-phone-lane"]),
             waitMillis = (request.headers["x-phone-wait"]?.toDoubleOrNull()?.times(1000))?.toLong()?.coerceIn(0, 80_000) ?: DefaultWaitMillis,
             budgetMillis = (request.headers["x-phone-timeout"]?.toDoubleOrNull()?.times(1000))?.toLong()?.minus(5000)?.coerceIn(1000, 80_000) ?: 80_000,
@@ -266,6 +267,11 @@ class PhoneUseGateway(
         val params = message.optJSONObject("params") ?: JSONObject()
         val name = params.optString("name")
         val arguments = params.optJSONObject("arguments") ?: JSONObject()
+        fun stripContext(obj: JSONObject) {
+            obj.remove("_host_permission")
+            obj.optJSONArray("actions")?.let { a -> for (i in 0 until a.length()) a.optJSONObject(i)?.let(::stripContext) }
+        }
+        stripContext(arguments)
         val result = runCatching {
             when (method) {
                 "initialize" -> initializeResult(pluginId)
@@ -305,6 +311,7 @@ class PhoneUseGateway(
     }
 
     private data class CallContext(val session: String, val lane: String, val waitMillis: Long,
+        val permissionMode: String = "unknown",
         val budgetMillis: Long = 80_000, val control: CallControl? = null)
 
     private fun runOperation(pluginId: String, name: String, arguments: JSONObject, call: CallContext, requestId: String): JSONObject {
@@ -794,6 +801,9 @@ class PhoneUseGateway(
     }
 
     private fun controlledDisplay(args: JSONObject, call: CallContext): String {
+        args.put("_host_permission", call.permissionMode)
+        if (call.permissionMode == "deny") return JSONObject().put("ok", false).put("code", "HOST_PERMISSION_DENIED")
+            .put("dispatched", false).toString()
         val raw = runtime.agentDisplay(args, call.session, call.lane,
             shouldStop = { call.control?.let { it.cancelled.get() || it.remaining() == 0L } ?: false },
             onProgress = { progress ->
@@ -805,6 +815,8 @@ class PhoneUseGateway(
                 } else call.control?.progress?.set(progress.toString())
             })
         return JSONObject(raw).apply {
+            put("host_permission", call.permissionMode)
+            if (call.permissionMode == "full") optJSONObject("user_takeover")?.put("required", false)?.put("host_authorized", true)
             call.control?.let { put("operation_id", it.key.substringAfter('|')).put("operation_finished", true).put("cancel_requested", it.cancelled.get()) }
             args.optString("_expected_package").takeIf { it.isNotBlank() }?.let { put("expected_package", it) }
         }.toString()

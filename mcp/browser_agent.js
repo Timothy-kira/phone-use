@@ -5,22 +5,23 @@
 // browser-use (MIT) and chrome-devtools-mcp / Playwright MCP (Apache-2.0); no code is copied.
 // Installs window.__pu once per document; every function returns plain JSON.
 (function () {
-  if (window.__pu && window.__pu.v === 3) return;
-  const refs = [];                // id -> WeakRef(element)
+  if (window.__pu && window.__pu.v === 4) return;
+  const refs = new Map();
+  let nextRef = Number(window.__pu_ref_base) || 0;                // id -> WeakRef(element)
   const ids = new WeakMap();      // element -> id
   const INTERACTIVE_ROLES = new Set(["button", "link", "checkbox", "radio", "tab", "menuitem", "menuitemcheckbox",
     "menuitemradio", "option", "switch", "combobox", "textbox", "searchbox", "slider", "spinbutton", "treeitem"]);
   const SKIP = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "TEMPLATE", "META", "LINK", "HEAD", "svg", "PATH"]);
-  const SENSITIVE = /(pass(word|wd)?|pwd|passcode|card.?(number|no)|cc-?(number|csc|exp)|cvv|cvc|security.?code|ssn|social.?security|iban|routing|account.?number|身份证|证件号|护照|密码|口令|银行卡|卡号|有效期|安全码|验证码|one-time-code)/i;
-  const RISKY = /(\bpay\b|payment|purchase|\bbuy\b|checkout|place.?order|order.?now|confirm.?order|subscribe|donate|transfer|send money|sign.?up|register|create.?account|delete|remove.?account|unsubscribe|支付|付款|购买|立即购|下单|提交订单|确认订单|结算|充值|转账|注册|开通|订阅|删除|注销|解绑)/i;
+  const SENSITIVE = new RegExp(window.__pu_policy.sensitive, "i");
+  const RISKY = new RegExp(window.__pu_policy.risky, "i");
 
   function idOf(el) {
     let id = ids.get(el);
-    if (id === undefined) { id = refs.length; refs.push(new WeakRef(el)); ids.set(el, id); }
+    if (id === undefined) { id = nextRef++; refs.set(id, new WeakRef(el)); ids.set(el, id); }
     return id;
   }
   function get(id) {
-    const r = refs[id];
+    const r = refs.get(id);
     const el = r && r.deref();
     if (!el || !el.isConnected) return null;
     return el;
@@ -200,7 +201,7 @@
       ok: true, url: location.href, title: document.title, interactive, chars: total,
       offset: opts.offset, truncated: opts.offset + opts.maxChars < total,
       scroll: { y: Math.round(scrollY), height: document.documentElement.scrollHeight, viewport: innerHeight },
-      text,
+      text, selection: String(getSelection() || ""),
     };
   }
 
@@ -221,7 +222,7 @@
     const x = off.x + r.left + r.width / 2, y = off.y + r.top + r.height / 2;
     let hit = false;
     const top = el.ownerDocument.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
-    if (top && (top === el || el.contains(top) || top.contains(el) || (top.closest && top.closest("label") && el.labels && [...el.labels].includes(top.closest("label"))))) hit = true;
+    if (top && (top === el || el.contains(top) || (top.closest && top.closest("label") && el.labels && [...el.labels].includes(top.closest("label"))))) hit = true;
     const name = nameOf(el);
     const risky = RISKY.test(name + " " + (el.value || "") + " " + (el.getAttribute("aria-label") || "")) ||
       (el.form && (el.type === "submit" || el.tagName === "BUTTON") && RISKY.test((el.form.action || "") + " " + (el.form.id || "") + " " + (el.form.className || "")));
@@ -231,6 +232,7 @@
   function focusAndSelect(id) {
     const el = get(id);
     if (!el) return { ok: false, code: "REF_STALE", errmsg: `e${id} is gone; take a new snapshot.` };
+    if (el.disabled || el.readOnly) return { ok: false, code: "READ_ONLY", errmsg: "The field cannot be edited." };
     el.scrollIntoView({ block: "center", behavior: "instant" });
     el.focus();
     if (el.isContentEditable) {
@@ -239,7 +241,7 @@
     } else if (typeof el.select === "function") {
       try { el.select(); } catch (e) { /* number/date inputs */ }
     }
-    return { ok: true, kind: kindOf(el), type: el.type || "", active: document.activeElement === el || el.contains(document.activeElement) };
+    return { ok: true, kind: kindOf(el), type: el.type || "", active: el.ownerDocument.activeElement === el || el.contains(el.ownerDocument.activeElement) };
   }
   function nativeSet(el, value) {
     const proto = el.tagName === "TEXTAREA" ? HTMLTextAreaElement.prototype : el.tagName === "SELECT" ? HTMLSelectElement.prototype : HTMLInputElement.prototype;
@@ -259,7 +261,7 @@
     const el = get(id);
     if (!el) return { ok: false, code: "REF_STALE" };
     nativeSet(el, value);
-    return { ok: true, value: el.value };
+    return { ok: el.value === String(value), code: el.value === String(value) ? "TEXT_VERIFIED" : "TEXT_NOT_APPLIED", value: el.value };
   }
   function fireChange(id) {
     const el = get(id);
@@ -277,7 +279,8 @@
       opts.find(o => norm(o.text).startsWith(w)) || opts.find(o => norm(o.text).includes(w) || (w && w.includes(norm(o.text)) && norm(o.text).length > 1));
     if (!pick) return { ok: false, code: "NO_SUCH_OPTION", options: opts.slice(0, 40).map(o => clean(o.text, 50)) };
     nativeSet(el, pick.value);
-    return { ok: true, selected: clean(pick.text, 60) };
+    return { ok: el.value === pick.value, dispatched: true, selected: clean(pick.text, 60),
+      code: el.value === pick.value ? "SELECTION_VERIFIED" : "SELECTION_NOT_APPLIED" };
   }
 
   function fieldLabel(el) {
@@ -411,6 +414,12 @@
     return { url: location.href, title: document.title, ready: document.readyState, y: Math.round(scrollY),
       height: document.documentElement.scrollHeight, viewport: innerHeight,
       textLength: (document.body && document.body.innerText || "").length,
+      selection: String(getSelection() || ""),
+      controls: [...document.querySelectorAll("input,textarea,select,[contenteditable=true]")].filter(visible).slice(0, 40).map(el => {
+        const r = el.getBoundingClientRect();
+        return {ref: `e${idOf(el)}`, value: SENSITIVE.test([el.type,el.name,el.id,el.autocomplete].join(" ")) ? "•••" : valueOf(idOf(el)),
+          width: Math.round(r.width), height: Math.round(r.height), checked: el.checked};
+      }),
       active: document.activeElement && document.activeElement !== document.body ? clean(nameOf(document.activeElement), 60) : "" };
   }
   function scrollPage(spec) {
@@ -528,7 +537,7 @@
     return true;
   }
 
-  window.__pu = { v: 3, idOf, get, snapshot, box, focusAndSelect, setValue, valueOf, fireChange, selectOption,
+  window.__pu = { v: 4, idOf, get, snapshot, box, focusAndSelect, setValue, valueOf, fireChange, selectOption,
     form, validity, submitInfo, requestSubmit, findText, pageState, scrollPage, extract, quote, waitCheck,
     risky: s => RISKY.test(s || ""), sensitive: s => SENSITIVE.test(s || "") };
 })();

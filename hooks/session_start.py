@@ -29,7 +29,8 @@ WHAT_SETUP_DOES = {
 
 def main() -> int:
     try:
-        sys.stdin.read()  # the event payload; nothing in it changes what we check
+        from host_policy import record_permission
+        record_permission(json.load(sys.stdin))
     except (OSError, ValueError):
         pass
     from phone_mcp import PhoneLink

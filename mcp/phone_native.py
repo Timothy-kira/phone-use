@@ -344,8 +344,10 @@ class PhoneNative:
         self.save()
 
     def need_confirm(self, args: dict, what: str) -> None:
-        if not args.get("confirm"):
-            raise NativeError("CONFIRM_REQUIRED", f"{what}. Ask the user; repeat with confirm:true after they agree.")
+        from host_policy import require_sensitive
+        denied = require_sensitive()
+        if denied:
+            raise NativeError(denied["code"], f"{what}. {denied['errmsg']}")
 
     # --- reading -----------------------------------------------------------------------------
 

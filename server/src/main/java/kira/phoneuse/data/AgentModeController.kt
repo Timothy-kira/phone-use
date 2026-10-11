@@ -283,6 +283,7 @@ class AgentModeController(
                 onProgress(JSONObject().put("completed_steps", JSONArray(completed.toString())).put("running_step", index))
                 val step = JSONObject(actionsArray.getJSONObject(index).toString())
                 step.put("_deadline_ms", deadline)
+                step.put("_host_permission", arguments.optString("_host_permission"))
                 val lastStep = index == actionsArray.length() - 1
                 val stepAction = PhoneUiMcp.normalizeAction(step.optString("action"))
                 if (!step.has("skip_capture")) {
@@ -540,22 +541,33 @@ class AgentModeController(
                     invalidArguments("Both 'x' and 'y' are required, using 0..1000 screen coordinates.")
                 } else {
                     val observed = loadPortalSnapshot(settings, alreadyStable = true)
+                    val settled = awaitStablePortalSnapshot(settings, displayId, observed = observed)
+                    if (!settled.details.optBoolean("stable"))
+                        return@withContext JSONObject(gatedError("LAYOUT_UNSTABLE", "The screen geometry is not quiet; no coordinate tap was sent."))
+                            .put("target_stability", settled.details).put("dispatched", false).toString()
+                    if (settled.snapshot.packageName != observed.packageName || settled.snapshot.displayId != observed.displayId ||
+                        settled.snapshot.width != observed.width || settled.snapshot.height != observed.height)
+                        return@withContext gatedError("STALE_SNAPSHOT", "The app or display changed; observe again before tapping.")
                     synchronized(observedSnapshots) {
                         observedSnapshots[observed.id] = observed
                         while (observedSnapshots.size > 8) observedSnapshots.remove(observedSnapshots.keys.first())
                     }
                     val px = (x.toLong() * 1000 / observed.width.coerceAtLeast(1)).toInt()
                     val py = (y.toLong() * 1000 / observed.height.coerceAtLeast(1)).toInt()
-                    val candidates = AgentModeUiTree.controlsAt(observed.nodes, px, py)
+                    val candidates = AgentModeUiTree.controlsAt(settled.snapshot.nodes, px, py)
                     val node = candidates.firstOrNull()
-                    if (node != null) {
-                        if (candidates.drop(1).any { it.bounds == node.bounds && it.parent == node.parent })
-                            return@withContext gatedError("COORDINATE_TARGET_AMBIGUOUS", "More than one current control occupies this point. Resolve a node; no click was sent.")
-                        val bound = JSONObject(arguments.toString()).put("action", "click_node").put("query", "#${node.clickIndex}")
-                            .put("snapshot_id", observed.id).apply { remove("x"); remove("y"); remove("at") }
-                        val answer = execute(settings, workspaceDirectory, termuxWorkspaceDirectory, bound.toString(), shouldStop, onProgress)
-                        return@withContext JSONObject(answer).put("coordinate_target_bound", "#${node.clickIndex}").toString()
+                    AgentModeSafety.protectedWindowPackage(settled.snapshot.nodes, settled.snapshot.packageName)?.let {
+                        return@withContext gatedError(AgentModeSafety.ProtectedWindowCode, "Refusing coordinate input into protected window $it.")
                     }
+                    if (node != null && AgentModeSafety.looksSensitiveLabel(node.label.ifBlank { node.text }) && arguments.optString("_host_permission") != "full")
+                        return@withContext gatedError("HOST_APPROVAL_REQUIRED", "This sensitive control requires host approval; model confirmation cannot grant it.")
+                    // A coordinate is an exact point, never a request to click a node's centre.
+                    // Native target clicks keep their stronger identity checks in click_node.
+                    val pointTarget = node?.copy(left = px - 1, right = px + 1, top = py - 1, bottom = py + 1)
+                    if (pointTarget != null && AgentModeUiTree.blockingOverlay(pointTarget, settled.snapshot.nodes) != null)
+                        return@withContext gatedError("TARGET_OCCLUDED", "The requested point is covered by another window; no tap was sent.")
+                    if (shouldStop() || android.os.SystemClock.uptimeMillis() >= deadline)
+                        return@withContext gatedError("OPERATION_STOPPED", "Stopped before coordinate dispatch.")
                     requireAgentModeService(settings).tap(displayId, x, y)
 
                     updateCursorPosition(x, y, animationDurationMillis = 80)
@@ -564,7 +576,10 @@ class AgentModeController(
                         workspaceDirectory,
                         termuxWorkspaceDirectory,
                         delayMillis = 40,
-                    )
+                    ).let { raw -> JSONObject(raw).put("dispatched", true)
+                        .put("coordinate_space", "screen_0_1000")
+                        .put("requested_point", JSONArray().put(arguments.optDouble("x")).put(arguments.optDouble("y")))
+                        .put("dispatched_pixels", JSONArray().put(x).put(y)).put("used_backend", "coordinate_tap").toString() }
                 }
             }
             "scroll" -> {
@@ -716,7 +731,7 @@ class AgentModeController(
                     invalidArguments("Missing required 'text' (or query) for search.")
                 } else {
                     val snapshot = runCatching { loadPortalSnapshot(settings, alreadyStable = true) }.getOrNull()
-                    if (snapshot != null && snapshot.nodes.any { it.focused && it.password })
+                    if (arguments.optString("_host_permission") != "full" && snapshot != null && snapshot.nodes.any { it.focused && AgentModeSafety.sensitiveField(it) })
                         return@withContext JSONObject(gatedError("USER_TAKEOVER_REQUIRED", "This is a credential field. Ask the takeover questionnaire before continuing."))
                             .put("dispatched", false).put("user_takeover", AgentModeSafety.userTakeover(snapshot.nodes)).toString()
                     val field = AgentModeUiTree.findSearchField(snapshot?.nodes.orEmpty())
@@ -731,6 +746,7 @@ class AgentModeController(
                         if (!current.editable) delay(200)
                     }
                     val inputArgs = JSONObject().put("edit_action", "set").put("text", query)
+                        .put("_host_permission", arguments.optString("_host_permission"))
                         .put("package", snapshot?.packageName.orEmpty())
                         .put("window_identity", snapshot?.nodes?.filter { it.windowType == 1 }?.map { it.windowId }?.distinct()?.sorted()?.joinToString(",").orEmpty())
                     val input = JSONObject(requireAgentModeService(settings).editText(displayId, inputArgs.toString()) { shouldStop() || android.os.SystemClock.uptimeMillis() >= deadline })
@@ -799,13 +815,14 @@ class AgentModeController(
                 args.put("edit_action", editAction)
                 if (args.optString("query").isNotBlank()) {
                     val focusArgs = JSONObject().put("action", "click_node").put("query", args.optString("query"))
+                        .put("_host_permission", arguments.optString("_host_permission"))
                         .put("snapshot_id", args.optString("snapshot_id")).put("observe", false).put("_deadline_ms", deadline)
                     val focused = JSONObject(execute(settings, workspaceDirectory, termuxWorkspaceDirectory, focusArgs.toString(), shouldStop))
                     if (!focused.optBoolean("ok")) return@withContext focused.toString()
                 }
                 val snapshot = loadPortalSnapshot(settings, alreadyStable = true)
                 val takeover = AgentModeSafety.userTakeover(snapshot.nodes)
-                if (snapshot.nodes.any { it.focused && (it.password || Regex("验证码|verification|otp", RegexOption.IGNORE_CASE).containsMatchIn("${it.id} ${it.hint}")) })
+                if (arguments.optString("_host_permission") != "full" && snapshot.nodes.any { it.focused && AgentModeSafety.sensitiveField(it) })
                     return@withContext JSONObject(gatedError("USER_TAKEOVER_REQUIRED", "Use the takeover questionnaire for credentials."))
                         .put("user_takeover", takeover).toString()
                 args.put("package", snapshot.packageName).put("window_identity", snapshot.nodes.filter { it.windowType == 1 }.map { it.windowId }.distinct().sorted().joinToString(","))
@@ -1044,11 +1061,11 @@ class AgentModeController(
                         }
                         if (target != null &&
                             AgentModeSafety.looksSensitiveLabel(target.label.ifBlank { target.text }) &&
-                            !arguments.optBoolean("confirm")
+                            arguments.optString("_host_permission") != "full"
                         ) {
                             gatedError(
                                 AgentModeSafety.SensitiveActionCode,
-                                "Sensitive control '${target.label}'. Pass confirm=true to proceed.",
+                                "Sensitive control '${target.label}' requires trusted host approval. Model confirm flags do not grant permission.",
                             )
                         } else {
                             activeActionContext.get()?.targetNode = target

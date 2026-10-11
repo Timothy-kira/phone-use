@@ -1,6 +1,6 @@
 {
   "name": "phone-use",
-  "version": "0.8.25",
+  "version": "0.8.27",
   "description": "Drive a connected Android phone over adb: launch apps, read the screen (screenshot or accessibility tree), tap, swipe, type and press keys on a virtual display that is shown live in a window on this computer. The phone needs only USB debugging; the core runs over adb; an optional owned background InputConnection companion supports custom editors without a keyboard or clipboard.",
   "author": {
     "name": "Akira",

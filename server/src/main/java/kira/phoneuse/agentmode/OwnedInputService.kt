@@ -30,10 +30,13 @@ class OwnedInputService : InputMethodService() {
         if (info.packageName != args.optString("package")) throw TextEditFailure("INPUT_CONTEXT_CHANGED", "The served editor belongs to another app.")
         if (display?.displayId != args.optInt("display_id")) throw TextEditFailure("INPUT_DISPLAY_MISMATCH", "The connection is not on the requested display.")
         val variation = info.inputType and InputType.TYPE_MASK_VARIATION
-        if ((info.inputType and InputType.TYPE_MASK_CLASS == InputType.TYPE_CLASS_TEXT && variation in setOf(InputType.TYPE_TEXT_VARIATION_PASSWORD, InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD)) ||
+        val sensitive = ((info.inputType and InputType.TYPE_MASK_CLASS == InputType.TYPE_CLASS_TEXT && variation in setOf(InputType.TYPE_TEXT_VARIATION_PASSWORD, InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD)) ||
             (info.inputType and InputType.TYPE_MASK_CLASS == InputType.TYPE_CLASS_NUMBER && variation == InputType.TYPE_NUMBER_VARIATION_PASSWORD) ||
-            Regex("otp|verification|验证码", RegexOption.IGNORE_CASE).containsMatchIn("${info.hintText} ${info.fieldName}"))
+            kira.phoneuse.data.InteractionPolicy.sensitive.containsMatchIn("${info.hintText} ${info.fieldName}"))
+        if (sensitive && args.optString("_host_permission") != "full")
             throw TextEditFailure("USER_TAKEOVER_REQUIRED", "Let the user enter credentials on the phone.")
+        if (sensitive && args.optString("edit_action") !in setOf("set", "clear", "read", "submit"))
+            throw TextEditFailure("SENSITIVE_EDIT_UNSUPPORTED", "Credential edits use one replacement and do not retain undo text.")
         val connection = currentInputConnection ?: throw TextEditFailure("INPUT_CONNECTION_UNAVAILABLE", "The editor provides no InputConnection.")
         val request = ExtractedTextRequest().apply { hintMaxChars = 1_048_576; hintMaxLines = 100_000; token = 21 }
         val extracted = connection.getExtractedText(request, 0) ?: throw TextEditFailure("INPUT_TEXT_UNREADABLE", "The editor does not expose complete text; no write was attempted.")
@@ -44,7 +47,8 @@ class OwnedInputService : InputMethodService() {
         val field = "ic|${args.optInt("display_id")}|${args.optString("window_identity")}|${info.packageName}|${info.fieldId}|${info.fieldName}|${info.inputType}"
         args.put("_field_identity", field)
         val action = args.optString("edit_action")
-        if (action == "read") return TextEdits.receipt(before, "owned_input_connection", args).put("field_identity", field)
+        if (action == "read") return if (sensitive) JSONObject().put("ok", true).put("dispatched", false).put("value_redacted", true)
+            else TextEdits.receipt(before, "owned_input_connection", args).put("field_identity", field)
         if (action == "submit") {
             val imeAction = info.imeOptions and EditorInfo.IME_MASK_ACTION
             if (imeAction !in setOf(EditorInfo.IME_ACTION_SEARCH, EditorInfo.IME_ACTION_GO, EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_SEND, EditorInfo.IME_ACTION_NEXT))
@@ -69,6 +73,8 @@ class OwnedInputService : InputMethodService() {
         val after = connection.getExtractedText(request, 0)
         if (generation != capturedGeneration || after == null || after.startOffset != 0 || after.partialStartOffset >= 0 || after.partialEndOffset >= 0 || after.text?.toString() != desired)
             throw TextEditFailure("TEXT_NOT_APPLIED", "Exact InputConnection read-back did not match. Inspect the result; do not replay.", true)
+        if (sensitive) return JSONObject().put("ok", true).put("dispatched", true).put("value_redacted", true)
+            .put("text_verified", true).put("used_backend", "owned_input_connection")
         TextEdits.verified(action, field, before, desired)
         return TextEdits.receipt(desired, "owned_input_connection").put("dispatched", true).put("text_verified", true).put("field_identity", field)
     }

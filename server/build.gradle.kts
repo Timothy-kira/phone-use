@@ -16,8 +16,8 @@ android {
         applicationId = "kira.phoneuse.server"
         minSdk = 26
         targetSdk = 28
-        versionCode = 825
-        versionName = "0.8.25"
+        versionCode = 827
+        versionName = "0.8.27"
     }
 
     buildTypes {

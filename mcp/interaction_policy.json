@@ -1,0 +1,4 @@
+{
+  "sensitive": "(pass(word|wd)?|pwd|passcode|card.?(number|no)|cc-?(number|csc|exp)|cvv|cvc|security.?code|ssn|social.?security|iban|routing|account.?number|身份证|证件号|护照|密码|口令|银行卡|卡号|有效期|安全码|验证码|one-time-code|\\botp\\b|verification.?code|one.?time.?code)",
+  "risky": "(\\bpay\\b|payment|purchase|\\bbuy\\b|checkout|place.?order|order.?now|confirm.?order|subscribe|donate|transfer|send money|sign.?up|register|create.?account|delete|remove.?account|unsubscribe|支付|付款|购买|立即购|下单|提交订单|确认订单|结算|充值|转账|注册|开通|订阅|删除|注销|解绑)"
+}

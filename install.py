@@ -145,6 +145,9 @@ class MiniMaxCode:
     def install(self) -> str:
         if os.path.abspath(self.target) == ROOT:
             return "this copy already is the MiniMax install"
+        expected = os.path.realpath(os.path.join(HOME, ".minimax", "plugins", NAME))
+        if os.path.realpath(self.target) != expected or os.path.islink(self.target):
+            raise RuntimeError("Refusing to replace a plugin outside the expected MiniMax install directory")
         if os.path.isdir(self.target):
             shutil.rmtree(self.target)
         # copytree writes fresh files: MiniMax refuses packages that contain hardlinks or .git.
