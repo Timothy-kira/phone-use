@@ -1,25 +1,105 @@
 # Phone Use
 
-Phone Use 插件与 AndroidWorld 审计档案。当前插件版本 **0.8.25**。
+**Learn how Android apps work through interaction — not just how to tap them.**
 
-默认分支 `插件` 保存可安装插件源码及 APK；`audit-reports` 分支保存结果汇总和完整评测轨迹。使用说明见 [Phone Use](docs/PHONE-USE.md)。
+Phone Use is an Android interaction plugin for AI agents. It connects desktop AI agents to Android devices and turns real interactions into **reusable experience, observable results, and a growing understanding of apps**.
 
-## AndroidWorld 评测
+Rather than treating every task as a fresh sequence of taps, Phone Use can reuse what it has learned from earlier interactions, including where features are located, how to navigate to them, and which workflows have worked before. Its knowledge is grounded in actual device observations—not hard-coded coordinates.
 
-**累计通过：113 / 116。** 任务由 **MiniMax Code CLI / MiniMax-M3.1-Flash-Preview** 在 AndroidWorld 模拟器上执行。
+Phone Use works through **Model Context Protocol (MCP)** and can be used with **Claude Code, MiniMax Code, Codex, and Cursor**. The Android-side service runs through ADB; no root or Shizuku is required.
 
-| 未通过任务 | 失败原因 | Benchmark 判断 |
+**Version:** `0.8.25` · **[Documentation](docs/PHONE-USE.md)** · **[Agent skill](skills/phone-use/SKILL.md)** · **[AndroidWorld audit](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)**
+
+## Why Phone Use?
+
+A conventional GUI agent primarily needs to answer: **“What should I click next?”**
+
+Phone Use also preserves answers to longer-lived questions:
+
+- **Where is a feature?** Build an app map of observed screens and navigation edges.
+- **How do I return to it?** Find a known route, resolve controls against the live UI, and verify each transition.
+- **What did this attempt establish?** Associate screen observations, actions, receipts, and task checks with referenceable evidence.
+- **What can be reused?** Distill successful interactions or human demonstrations into methods and verified GUI flows rather than coordinate tapes.
+- **What failed?** Retain failure signals and feed execution results back into workflow validation and maturity.
+
+Phone Use builds **interaction-grounded knowledge of the digital environment**. This refers to learned information about observed app behavior—not a claim of a general-purpose predictive world model.
+
+## Capabilities
+
+| Capability | Description |
+| --- | --- |
+| **Learn from interaction** | Retain useful knowledge from actual Android tasks and user demonstrations, rather than replaying fixed tap coordinates. |
+| **Explore and navigate** | Discover app features, remember navigation paths, and revisit known destinations. |
+| **Reusable workflows** | Capture, recall, and validate GUI procedures for recurring tasks. |
+| **Evidence-backed execution** | Observe UI state, inspect action results, and verify progress toward the user's goal. |
+| **Android app control** | Launch apps, inspect screens, interact with controls, scroll, and enter or edit text. |
+| **Mobile browser** | Browse and interact with web pages on the phone, including forms and content extraction. |
+| **Live phone window** | Watch the agent work and take over to demonstrate a task when needed. |
+| **Multiple agent harnesses** | Connect to Claude Code, MiniMax Code, Codex, Cursor, and other compatible MCP hosts. |
+| **Multi-task coordination** | Support multiple virtual displays with safeguards for shared app and input resources. |
+
+Phone Use normally operates on a **virtual display**, leaving the primary phone screen available. It uses ADB and does not require root or Shizuku. Some device-specific operations may need the real screen or additional user-approved setup.
+
+## Quick start
+
+### Requirements
+
+- **Python 3.9+** and **ADB** (`adb` on `PATH`, or set `PHONE_USE_ADB`).
+- An Android device with **USB or wireless debugging** authorized for your computer.
+- A **Chromium-based browser** for the optional live phone window.
+- **Android 10+** for virtual-display support, subject to device and app compatibility.
+
+### Install
+
+```bash
+git clone https://github.com/Timothy-kira/phone-use.git
+cd phone-use
+python install.py
+```
+
+The installer detects supported harnesses and asks before configuring each one. You can inspect detected hosts with:
+
+```bash
+python install.py --list
+```
+
+After connecting and authorizing your phone, invoke `phone_status` from your agent harness to check ADB, the Android-side service, and the phone window. Then use `agent_display` for Android apps or `phone_browser` for web pages on the phone.
+
+For the full setup guide, tool arguments, optional input companion, multi-device operation, and safety behavior, see **[docs/PHONE-USE.md](docs/PHONE-USE.md)** and **[skills/phone-use/SKILL.md](skills/phone-use/SKILL.md)**.
+
+## AndroidWorld evaluation
+
+**Cumulative tasks passed: 113 / 116.**
+
+The evaluation used **MiniMax Code CLI** as the agent harness and **MiniMax-M3.1-Flash-Preview** as the model, operating an AndroidWorld emulator with Phone Use.
+
+| Task not passed | Observed outcome | Assessment |
 | --- | --- | --- |
-| ExpenseAddMultipleFromMarkor | 记录已保存，但备注、时间等业务条件不匹配。 | 暂无官方评分错误的证据。 |
-| MarkorMergeNotes | 合并文本丢失末尾换行，实际 64 字符，预期 65 字符。 | 属于精确文本操作与验证问题。 |
-| OsmAndTrack | 只完成两个地点，未补齐后续途经点，也未保存轨迹，官方评分 0.0。 | 官方离线地图校验通过，暂无评分错误的证据。 |
+| `ExpenseAddMultipleFromMarkor` | Entries were saved, but business conditions including notes and timestamps did not match. | No established evidence of a benchmark grading error. |
+| `MarkorMergeNotes` | The merged text missed the final newline: 64 characters instead of the expected 65. | Exact-text operation and verification failure. |
+| `OsmAndTrack` | Only two locations were handled; subsequent waypoints and the saved track were missing. Official score: 0.0. | The official offline-map check passed; no established evidence of a grading error. |
 
-判分条件未修改。基准运行关闭跨任务记忆，采用独立任务配置，并在模型操作期间封存评分状态。
+**Evaluation protocol and scope**
 
-官方 [OsmAnd 历史修复](https://github.com/google-research/android_world/commit/ab451217332ae43fe22f9fc4af783a8da80db86f) 已包含在本地评分代码中。
+- Benchmark grading conditions were not modified.
+- **Cross-task memory was disabled** during benchmark runs. Tasks used independent configurations, and grader state was kept sealed while the model was operating.
+- The local grading code included the official [OsmAnd historical fix](https://github.com/google-research/android_world/commit/ab451217332ae43fe22f9fc4af783a8da80db86f).
+- **113/116 is a cumulative passed-task result**, not by itself proof of the performance gain from persistent memory, App Map, or cross-task learning. It is not presented here as a formally accepted leaderboard ranking.
 
-[评测结果汇总](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)
+The public audit includes **116 task traces**: all 113 passed tasks and the latest officially scored failed trace for each of the three remaining tasks. The archive retains tool calls, receipts, screenshots, model summaries, and official grades. **It does not contain video.** Version numbers and hashes have been redacted.
 
-已提供覆盖全部 116 道题的完整评测轨迹：113 道通过题目的轨迹，以及剩余三题各自最新且已有官方评分的失败轨迹。包含完整调用、工具回执、截图、模型总结和官方评分；不含录像，版本号和哈希已脱敏。
+**[Audit summary](https://github.com/Timothy-kira/phone-use/tree/audit-reports/audit)** · **[Full trace archive](https://github.com/Timothy-kira/phone-use/raw/refs/heads/audit-reports/audit/androidworld-traces.zip)** · **[Trace package details](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-PACKAGE.md)** · **[Per-task index](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-INDEX.json)**
 
-[下载完整轨迹压缩包](https://github.com/Timothy-kira/phone-use/raw/refs/heads/audit-reports/audit/androidworld-traces.zip) · [轨迹包说明](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-PACKAGE.md) · [逐题索引](https://github.com/Timothy-kira/phone-use/blob/audit-reports/audit/TRACE-INDEX.json)
+## Repository structure
+
+| Path | Purpose |
+| --- | --- |
+| [`mcp/`](mcp/) | Host-side MCP tools and utilities. |
+| [`server/`](server/) | Android-side service and supporting components. |
+| [`skills/phone-use/`](skills/phone-use/) | Agent-facing workflows and safety instructions. |
+| [`docs/PHONE-USE.md`](docs/PHONE-USE.md) | Detailed setup, tools and operating guide. |
+| [`install.py`](install.py) | Harness discovery and plugin installation. |
+| [`bin/`](bin/) | Android-side server APK. |
+| [`audit-reports` branch](https://github.com/Timothy-kira/phone-use/tree/audit-reports) | AndroidWorld results and full evaluation traces. |
+
+The default branch **`插件`** contains the installable plugin and source code. The **`audit-reports`** branch contains the evaluation archive.
